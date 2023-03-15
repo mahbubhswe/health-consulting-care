@@ -1,0 +1,14 @@
+import nc from "next-connect";
+import { prisma } from "../../../utils/db.ts";
+const handler = nc();
+handler.get(async (req, res) => {
+  try {
+    const classList = await prisma.class.findMany();
+    const teacher = await prisma.teacher.findMany();
+    res.send({ classList, teacher });
+  } catch (error) {
+    res.send(error.message);
+  }
+});
+
+export default handler;
