@@ -9,12 +9,9 @@ const theme = createTheme({
       main: "#556cd6",
     },
     secondary: {
-      main: "#19857b",
+      main: "#00DDB3",
     },
-    yallo: {
-      main: "#F2D801",
-    },
-   
+
     error: {
       main: red.A400,
     },

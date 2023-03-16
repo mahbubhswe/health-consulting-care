@@ -52,7 +52,7 @@ export default function OurMission() {
               display: "grid",
               placeContent: "center",
             }}
-         />
+          />
           <Box
             sx={{
               height: "500px",

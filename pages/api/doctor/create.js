@@ -1,27 +1,32 @@
 import nc from "next-connect";
+import bcryptjs from "bcryptjs";
 import { isAuth } from "../../../utils/auth";
 import { prisma } from "../../../utils/db.ts";
 const handler = nc();
 handler.use(isAuth);
 handler.post(async (req, res) => {
   try {
-    //check employee exist or not
+    //check doctor exist or not
     const isExist = await prisma.Doctor.findUnique({
       where: { email: String(req.body.email) },
     });
     if (isExist) {
-      res.send("Sorry, this doctor already exists");
+      res.send("Sorry, this employee already exists");
     } else {
+      const { fullName, phone, email, password, departmentName, gender } =
+        req.body;
       await prisma.Doctor.create({
         data: {
-          employeeId: String(req.body.employeeId),
-          employeeName: req.body.employeeName,
-          employeeType: req.body.employeeType,
-          employeePhone: req.body.employeePhone,
-          salary: Number(req.body.salary),
+          fullName,
+          departmentName,
+          phone,
+          email,
+          gender,
+          password: bcryptjs.hashSync(password),
         },
       });
-      res.send("Employee added successfully");
+
+      res.send("Doctor added successfully");
     }
   } catch (error) {
     res.send(error.message);

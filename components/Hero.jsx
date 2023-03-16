@@ -1,9 +1,11 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
+import PrimaryAnim from "./PrimaryAnim";
+import Typewriter from "typewriter-effect";
 import Lottie from "lottie-web";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import * as React from "react";
-import Typewriter from "typewriter-effect";
+import Link from "next/link";
 function Hero() {
   const router = useRouter();
   const container = React.useRef(null);
@@ -18,59 +20,71 @@ function Hero() {
     return () => instance.destroy();
   }, []);
   return (
-    <Stack
-      direction={{ xs: "column", sm: "column", md: "row" }}
-      sx={{ background: "#F8F9FA", height: "600px" }}
-      justifyContent="center"
-      alignItems="center"
-      spacing={5}
-    >
-      <Box sx={{  width: { xs: "100%", sm: "100%", md: "50%" }, display: "grid", placeContent: "center" }}>
-        <Typography
+    <div style={{ backgroundImage: "linear-gradient(180deg,#019D91,#FFFFFF)" }}>
+      <Stack
+        direction={{ xs: "column", sm: "column", md: "row" }}
+        sx={{ height: { xs: "800", sm: "800", md: "600" } }}
+        justifyContent="center"
+        alignItems="center"
+        spacing={5}
+      >
+        <Box
+          ref={container}
           sx={{
-            fontSize: { xs: "150%", sm: "150%", md: "250%" },
-            fontFamily: "fantasy",
-            color: "#BB3D6E",
+            width: { xs: "100%", sm: "100%", md: "50%" },
+            display: "grid",
+            placeContent: "center",
           }}
         >
-          <Typewriter
-            options={{
-              strings: "Welcome to Our School",
-              autoStart: true,
-              loop: true,
-            }}
-          />
-        </Typography>
-        <Typography
-          sx={{
-            textAlign: "center",
-            fontSize: { xs: "100%", sm: "100%", md: "200%" },
-            fontFamily: "Georgia",
-          }}
-        >
-          Get Admission Today
-        </Typography>
-        <Typography align="center">
-          <Button
-            color="yallo"
-            size="large"
-            variant="contained"
-            sx={{ width: "200px" }}
-            onClick={() => router.push("/student-portal")}
+          <PrimaryAnim />
+          <Typography
+            variant="h2"
+            fontWeight={800}
+            sx={{ color: "#22292F" }}
+            align="center"
           >
-            Student Portal
-          </Button>
-        </Typography>
-      </Box>
-      <Box
-        ref={container}
-        sx={{
-          width: { xs: "100%", sm: "100%", md: "50%" },
-          display: "grid",
-          placeContent: "center",
-        }}
-      />
-    </Stack>
+            {"Health"}
+            <span style={{ color: "#ffffff" }}> Consulting</span> Care
+          </Typography>
+
+          <Typography
+            align="center"
+            variant="h4"
+            sx={{ fontFamily: "cursive", fontWeight: 800, color: "#BB3D6E" }}
+          >
+            <Typewriter
+              options={{
+                strings: "Your Health Solutions",
+                autoStart: true,
+                loop: true,
+              }}
+            />
+          </Typography>
+          <br></br>
+          <Typography align="center">
+            <Link href="/login">
+              <Button
+                variant="outlined"
+                color="secondary"
+                sx={{ width: "200px", p: "10px" }}
+                size="large"
+              >
+                Login
+              </Button>
+            </Link>
+          </Typography>
+        </Box>
+
+        <Box
+          ref={container}
+          sx={{
+            width: { xs: "100%", sm: "100%", md: "50%" },
+            display: "grid",
+            placeContent: "center",
+          }}
+        />
+      </Stack>
+    </div>
   );
 }
 

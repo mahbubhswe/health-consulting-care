@@ -1,15 +1,12 @@
 import React from "react";
 import useSWR from "swr";
-import Dashboard from "../../components/Dashboard";
+import Dashboard from "../../components/AdminDashboard";
 import DashboardLoader from "../../components/DashboardLoader";
-import Layout from "../../components/Layout";
+import Layout from "../../components/AdminLayout";
 import axios from "axios";
 const getDashboardInfo = (url) => axios.get(url).then((res) => res.data);
 export default function Index() {
-  const { data } = useSWR(
-    `/api/user/getDashboardInfo`,
-    getDashboardInfo
-  );
+  const { data } = useSWR(`/api/user/getDashboardInfo`, getDashboardInfo);
 
   if (!data) {
     return (

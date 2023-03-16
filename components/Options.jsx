@@ -52,7 +52,7 @@ export default function Options() {
                 alt="icon"
               />
             </ListItemIcon>
-            <ListItemText>Student attendance</ListItemText>
+            <ListItemText>Add Doctor</ListItemText>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
