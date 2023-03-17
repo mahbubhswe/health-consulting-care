@@ -107,7 +107,9 @@ export default function AdminLogin() {
       </div>
       <br />
       <Typography align="right">
-        <Link href={"/registration"}>`Don't have an account? Create now`</Link>
+        <Link
+          href={"/registration"}
+        >{`Don't have an account? Create now`}</Link>
       </Typography>
       <Backdrop open={open}>
         <CircularProgress color="inherit" />
