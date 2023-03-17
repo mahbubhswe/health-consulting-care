@@ -1,8 +1,8 @@
 import { Tabs } from "react-simple-tabs-component";
 import "react-simple-tabs-component/dist/index.css";
-import DoctorLogin from "./DoctorLogin";
-import PatientLogin from "./PatientLogin";
-import AdminLogin from "./AdminLogin";
+import DoctorLogin from "./../components/doctor/DoctorLogin";
+import PatientLogin from "./../components/patient/PatientLogin";
+import AdminLogin from "./../components/admin/AdminLogin";
 
 const tabs1 = () => {
   return <PatientLogin />;

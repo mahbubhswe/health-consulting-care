@@ -1,8 +1,8 @@
 import React from "react";
 import useSWR from "swr";
 import Loading from "../../../../components/Loading";
-import AdminLayout from "../../../../components/AdminLayout";
-import ManageDoctor from "../../../../components/ManageDoctor";
+import AdminLayout from "../../../../components/admin/AdminLayout";
+import ManageDoctor from "../../../../components/admin/ManageDoctor";
 import axios from "axios";
 const getDoctor = (url) => axios.get(url).then((res) => res.data);
 export default function Index() {
@@ -10,7 +10,7 @@ export default function Index() {
   if (!data) {
     return (
       <AdminLayout pageTitle="Loading...">
-        <Loading />;
+        <Loading />
       </AdminLayout>
     );
   }

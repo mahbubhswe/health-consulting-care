@@ -1,7 +1,6 @@
 import * as React from "react";
 import Head from "next/head";
 import Container from "@mui/material/Container";
-import { Paper } from "@mui/material";
 
 import Lottie from "lottie-web";
 export default function Layout({ pageTitle, children }) {

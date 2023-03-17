@@ -13,14 +13,13 @@ export const adminSignToken = (admin) => {
     }
   );
 };
-export const teacherSignToken = (teacher) => {
+export const doctorSignToken = (doctor) => {
   return jwt.sign(
     {
-      name: teacher.name,
-      phone: teacher.phone,
-      email: teacher.email,
-      teacherInitial: teacher.teacherInitial,
-      designation: teacher.designation,
+      fullName: doctor.fullName,
+      phone: doctor.phone,
+      email: doctor.email,
+      departmentName: doctor.departmentName,
     },
     process.env.JWT_Secreet,
     {
@@ -28,11 +27,11 @@ export const teacherSignToken = (teacher) => {
     }
   );
 };
-export const studentSignToken = (student) => {
+export const patientSignToken = (patient) => {
   return jwt.sign(
     {
-      name: student.name,
-      studentId: student.studentId,
+      fullName: patient.fullName,
+      phone: patient.phone,
     },
     process.env.JWT_Secreet,
     {

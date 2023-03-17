@@ -1,8 +1,8 @@
 import React from "react";
 import useSWR from "swr";
-import AdminDashboard from "../../../components/admin/AdminDashboard";
+import DoctorDashboard from "../../../components/doctor/DoctorDashboard";
 import DashboardLoader from "./../../../components/DashboardLoader";
-import AdminLayout from "../../../components/admin/AdminLayout";
+import DoctorLayout from "../../../components/doctor/DoctorLayout";
 import axios from "axios";
 const getDashboardInfo = (url) => axios.get(url).then((res) => res.data);
 export default function Index() {
@@ -10,14 +10,14 @@ export default function Index() {
 
   if (!data) {
     return (
-      <AdminLayout pageTitle="Loading...">
+      <DoctorLayout pageTitle="Loading...">
         <DashboardLoader />
-      </AdminLayout>
+      </DoctorLayout>
     );
   }
   return (
-    <AdminLayout pageTitle="Welcome to Admin Dashboard">
-      <AdminDashboard data={data} />
-    </AdminLayout>
+    <DoctorLayout pageTitle="Welcome to Doctor Dashboard">
+      <DoctorDashboard data={data} />
+    </DoctorLayout>
   );
 }

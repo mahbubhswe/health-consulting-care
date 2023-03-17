@@ -20,10 +20,14 @@ function Hero() {
     return () => instance.destroy();
   }, []);
   return (
-    <div style={{ backgroundImage: "linear-gradient(180deg,#019D91,#FFFFFF)" }}>
+    <div
+      style={{
+        background: "#FAFAFA",
+      }}
+    >
       <Stack
         direction={{ xs: "column", sm: "column", md: "row" }}
-        sx={{ height: { xs: "800", sm: "800", md: "600" } }}
+        sx={{ height: "700px" }}
         justifyContent="center"
         alignItems="center"
         spacing={5}
@@ -44,7 +48,7 @@ function Hero() {
             align="center"
           >
             {"Health"}
-            <span style={{ color: "#ffffff" }}> Consulting</span> Care
+            <span style={{ color: "#00C1A2" }}> Consulting</span> Care
           </Typography>
 
           <Typography

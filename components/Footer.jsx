@@ -62,20 +62,14 @@ export default function Footer() {
                 <ListItemIcon>
                   <EmailIcon sx={{ color: "#21335C" }} />
                 </ListItemIcon>
-                <ListItemText
-                  primary="Email"
-                  secondary="example@gmail.com"
-                />
+                <ListItemText primary="Email" secondary="example@gmail.com" />
               </ListItem>
 
               <ListItem>
                 <ListItemIcon>
                   <LocationOnIcon sx={{ color: "#21335C" }} />
                 </ListItemIcon>
-                <ListItemText
-                  primary="Address"
-                  secondary="House, Road ,xxx"
-                />
+                <ListItemText primary="Address" secondary="House, Road ,xxx" />
               </ListItem>
             </List>
           </Box>
@@ -83,7 +77,7 @@ export default function Footer() {
       </Container>
       <Divider></Divider>
       <Typography align="center" sx={{ color: "gray", mt: "20px" }}>
-        All Rights Reserved @ {new Date().getFullYear()} Your School Name
+        All Rights Reserved @ {new Date().getFullYear()} XYZ Health Consulting Care
       </Typography>
     </Box>
   );

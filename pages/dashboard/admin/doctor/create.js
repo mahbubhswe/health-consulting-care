@@ -1,6 +1,6 @@
 import React from "react";
-import AddDoctor from "../../../../components/AddDoctor";
-import AdminLayout from "../../../../components/AdminLayout";
+import AddDoctor from "../../../../components/admin/AddDoctor";
+import AdminLayout from "../../../../components/admin/AdminLayout";
 
 export default function Index() {
   return (
