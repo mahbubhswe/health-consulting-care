@@ -57,7 +57,7 @@ export default function PatientOptions() {
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton
-            onClick={() => router.push("/dashboard/admin/appointment")}
+            onClick={() => router.push("/dashboard/patient/appointment")}
           >
             <ListItemIcon>
               <Image

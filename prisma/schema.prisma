@@ -22,7 +22,10 @@ model Doctor {
   phone       String   @unique
   email       String   @unique
   gender      String
+  roomNumber Int
   password    String
+    appointment Appointment[]
+
   joiningDate DateTime @default(now())
 }
 
@@ -38,9 +41,10 @@ model Patient {
 
 model Appointment {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  patient      Patient     @relation(fields: [id], references: [id],onDelete: Cascade)
-  doctorName String 
-  doctorPhone String @unique  
+  patient      Patient     @relation(fields: [patientPhone], references: [phone],onDelete: Cascade)
+  patientPhone String
+    doctor      Doctor     @relation(fields: [doctorPhone], references: [phone],onDelete: Cascade)
+  doctorPhone String
   status String @default("Panding")
   time    String
 }
