@@ -6,7 +6,7 @@ import ManageAppointment from "../../../../components/patient/ManageAppointment"
 import axios from "axios";
 const getAppointment = (url) => axios.get(url).then((res) => res.data);
 export default function Index() {
-  const { data } = useSWR(`/api/patient/read`, getAppointment);
+  const { data } = useSWR(`/api/appointment/read`, getAppointment);
   if (!data) {
     return (
       <PatienLayout pageTitle="Loading...">
@@ -15,7 +15,7 @@ export default function Index() {
     );
   }
   return (
-    <PatienLayout pageTitle="Doctor List">
+    <PatienLayout pageTitle="Appointment List">
       <ManageAppointment data={data} />
     </PatienLayout>
   );

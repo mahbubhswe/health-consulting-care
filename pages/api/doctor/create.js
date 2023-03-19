@@ -11,10 +11,17 @@ handler.post(async (req, res) => {
       where: { email: String(req.body.email) },
     });
     if (isExist) {
-      res.send("Sorry, this employee already exists");
+      res.send("Sorry, this doctor already exists");
     } else {
-      const { fullName, phone, email, password, departmentName, gender } =
-        req.body;
+      const {
+        fullName,
+        phone,
+        email,
+        password,
+        departmentName,
+        gender,
+        roomNumber,
+      } = req.body;
       await prisma.Doctor.create({
         data: {
           fullName,
@@ -22,6 +29,7 @@ handler.post(async (req, res) => {
           phone,
           email,
           gender,
+          roomNumber: Number(roomNumber),
           password: bcryptjs.hashSync(password),
         },
       });

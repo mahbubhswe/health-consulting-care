@@ -9,13 +9,15 @@ import CreateFormButtonSpacer from "../CreateFormButtonSpacer";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
+
 import { useLocalStorage } from "@rehooks/local-storage";
-export default function CreateAppoinment({ data}) {
+import { Box, Typography } from "@mui/material";
+export default function CreateAppoinment({ data }) {
   const [open, setOpen] = React.useState(false);
-  const [time, setTime] = React.useState();
-  const [doctorPhone, setDoctorPhone] = React.useState(0);
+  const [doctorInfo, setDoctorInfo] = React.useState({});
   const router = useRouter();
   const [userInfo] = useLocalStorage("userInfo");
+  const [time, setTime] = React.useState("10:00");
 
   //create employee
   const handelSubmit = async (e) => {
@@ -35,9 +37,12 @@ export default function CreateAppoinment({ data}) {
         const { data } = await axios.post(
           `/api/appointment/create`,
           {
-            patientPhone,
-            doctorPhone,
-            time,
+            patientPhone: userInfo.phone,
+            doctorPhone: doctorInfo.phone,
+            departmentName: doctorInfo.departmentName,
+            doctorName: doctorInfo.fullName,
+            roomNumber: doctorInfo.roomNumber,
+            time: time,
           },
           {
             headers: {
@@ -64,9 +69,15 @@ export default function CreateAppoinment({ data}) {
     <React.Fragment>
       <Stack spacing={2} component="form" onSubmit={handelSubmit}>
         <Autocomplete
-          options={data.map((option) => option.fullName)}
+          options={
+            data.length != 0 ? data.map((option) => option.fullName) : []
+          }
           onChange={(event, newValue) => {
-            selectDoctorName(data.filter((item) => item == newValue));
+            data.forEach((element) => {
+              if (element.fullName == newValue) {
+                setDoctorInfo(element);
+              }
+            });
           }}
           renderInput={(params) => (
             <TextField
@@ -79,24 +90,42 @@ export default function CreateAppoinment({ data}) {
             />
           )}
         />
+        <Box
+          sx={{ border: "1px  dashed #ccc", p: "10px", borderRadius: "4px" }}
+        >
+          <Typography fontWeight={900}>{`Doctor's Information`}</Typography>
+          <Typography>
+            Name: <strong>{doctorInfo.fullName}</strong>
+          </Typography>
+          <Typography>
+            Department: <strong>{doctorInfo.departmentName}</strong>
+          </Typography>
+          <Typography>
+            Email: <strong>{doctorInfo.email}</strong>
+          </Typography>
+          <Typography>
+            Phone: <strong>{doctorInfo.phone}</strong>
+          </Typography>
+          <Typography>
+            Room Number: <strong>{doctorInfo.roomNumber}</strong>
+          </Typography>
+        </Box>
         <TextField
-          label="Doctor Phone"
-          type="tel"
           size="small"
           required
           fullWidth
-          disabled
           color="secondary"
-          value={doctorPhone}
+          label="Select time"
+          type="time"
+          onChange={(e) => setTime(e.target.value)}
         />
-
         <CreateFormButtonSpacer>
           <Button
             type="button"
             variant="contained"
             color="error"
             size="small"
-            onClick={() => router.push("/dashboard/admin/doctor")}
+            onClick={() => router.push("/dashboard/patient/appointment")}
           >
             Cancel
           </Button>

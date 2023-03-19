@@ -24,6 +24,7 @@ export default function AddDoctor() {
   const [departmentName, setDepartmentName] = React.useState();
   const [phone, setPhone] = React.useState(0);
   const [email, setEmail] = React.useState();
+  const [roomNumber, setRoomNumber] = React.useState();
   const [password, setPassword] = React.useState();
   const [gender, setGender] = React.useState();
   const router = useRouter();
@@ -53,6 +54,7 @@ export default function AddDoctor() {
             password,
             gender,
             email,
+            roomNumber,
           },
           {
             headers: {
@@ -112,7 +114,6 @@ export default function AddDoctor() {
             />
           )}
         />
-
         <MuiPhoneNumber
           defaultCountry={"bd"}
           label="Phone"
@@ -125,7 +126,6 @@ export default function AddDoctor() {
           countryCodeEditable={false}
           onChange={handlerPhoneinput}
         />
-
         <TextField
           label="Email"
           type="email"
@@ -136,6 +136,18 @@ export default function AddDoctor() {
           color="secondary"
           onChange={(e) => {
             setEmail(e.target.value);
+          }}
+        />{" "}
+        <TextField
+          label="Room Number"
+          type="number"
+          placeholder="Enter room number"
+          size="small"
+          required
+          fullWidth
+          color="secondary"
+          onChange={(e) => {
+            setRoomNumber(e.target.value);
           }}
         />
         <TextField
@@ -150,7 +162,6 @@ export default function AddDoctor() {
             setPassword(e.target.value);
           }}
         />
-
         <FormControl
           required
           onChange={(e) => {

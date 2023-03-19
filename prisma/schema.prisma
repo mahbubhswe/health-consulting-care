@@ -45,6 +45,10 @@ model Appointment {
   patientPhone String
     doctor      Doctor     @relation(fields: [doctorPhone], references: [phone],onDelete: Cascade)
   doctorPhone String
+  doctorName String
+    departmentName String
+
+  roomNumber Int
   status String @default("Panding")
   time    String
 }
