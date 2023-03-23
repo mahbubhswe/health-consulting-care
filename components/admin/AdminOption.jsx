@@ -106,6 +106,69 @@ export default function AdminOptions() {
       </ListItem>
 
       <ListItem disablePadding>
+        <ListItemButton
+          onClick={() => router.push("/dashboard/admin/medicine")}
+        >
+          <ListItemIcon>
+            <Image
+              src="/icons/medicine.png"
+              height={25}
+              width={25}
+              quality={100}
+              alt="icon"
+            />
+          </ListItemIcon>
+          <ListItemText>Medicine</ListItemText>
+        </ListItemButton>
+      </ListItem>
+      <ListItem disablePadding>
+        <ListItemButton
+          onClick={() => router.push("/dashboard/admin/ambulance")}
+        >
+          <ListItemIcon>
+            <Image
+              src="/icons/ambulance.png"
+              height={25}
+              width={25}
+              quality={100}
+              alt="icon"
+            />
+          </ListItemIcon>
+          <ListItemText>Ambulance</ListItemText>
+        </ListItemButton>
+      </ListItem>
+      <ListItem disablePadding>
+        <ListItemButton
+          onClick={() => router.push("/dashboard/admin/blood-bank")}
+        >
+          <ListItemIcon>
+            <Image
+              src="/icons/bloodBank.png"
+              height={25}
+              width={25}
+              quality={100}
+              alt="icon"
+            />
+          </ListItemIcon>
+          <ListItemText>Blood Bank</ListItemText>
+        </ListItemButton>
+      </ListItem>
+      <ListItem disablePadding>
+        <ListItemButton onClick={() => router.push("/dashboard/admin/cabin")}>
+          <ListItemIcon>
+            <Image
+              src="/icons/cabine.png"
+              height={25}
+              width={25}
+              quality={100}
+              alt="icon"
+            />
+          </ListItemIcon>
+          <ListItemText>Cabin</ListItemText>
+        </ListItemButton>
+      </ListItem>
+
+      <ListItem disablePadding>
         <ListItemButton onClick={() => setOpen(!open)}>
           <ListItemIcon>
             <Image

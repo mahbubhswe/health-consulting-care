@@ -47,8 +47,36 @@ model Appointment {
   doctorPhone String
   doctorName String
     departmentName String
-
   roomNumber Int
   status String @default("Panding")
   time    String
 }
+
+model Medicine{
+   id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  medicineName String
+  brand String
+  price Int
+  quantity Int
+}
+
+model BloodBank{
+   id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  phone       String   @unique
+  bloodGroup       String   @unique
+  address    String
+  gender String
+  lastDonationDate String
+}
+model Ambulance{
+   id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  ambulanceNumber Int @unique
+}
+model Cabin{
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  roomNumber Int @unique
+  cabinNumber Int @unique
+  status String @default("free")
+}
+
