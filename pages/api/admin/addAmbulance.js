@@ -11,7 +11,7 @@ handler.post(async (req, res) => {
       res.send("Sorry, this ambulance already exists");
     } else {
       await prisma.Ambulance.create({
-        ...req.body,
+        data: req.body,
       });
 
       res.send("Ambulance added successfully");

@@ -4,30 +4,14 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import Autocomplete from "@mui/material/Autocomplete";
-import MuiPhoneNumber from "material-ui-phone-number";
 import CreateFormButtonSpacer from "../CreateFormButtonSpacer";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useLocalStorage } from "@rehooks/local-storage";
-import {
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
-} from "@mui/material";
 export default function AddMedicine() {
   const [open, setOpen] = React.useState(false);
   const [ambulanceNumber, setAmbulanceNumber] = React.useState();
-  const [brand, setBrand] = React.useState();
-  const [quantity, setQuantity] = React.useState();
-  const [phone, setPhone] = React.useState(0);
-  const [email, setEmail] = React.useState();
-  const [roomNumber, setRoomNumber] = React.useState();
-  const [password, setPassword] = React.useState();
-  const [gender, setGender] = React.useState();
   const router = useRouter();
   const [userInfo] = useLocalStorage("userInfo");
 
@@ -36,7 +20,7 @@ export default function AddMedicine() {
     e.preventDefault();
     Swal.fire({
       title: "Are you sure?",
-      text: "Want to add this doctor",
+      text: "Want to add this ambulance",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -47,31 +31,20 @@ export default function AddMedicine() {
       if (result.isConfirmed) {
         setOpen(true);
         const { data } = await axios.post(
-          `/api/doctor/create`,
+          `/api/admin/addAmbulance`,
           {
-            fullName,
-            departmentName,
-            phone,
-            password,
-            gender,
-            email,
-            roomNumber,
+            ambulanceNumber: Number(ambulanceNumber),
           },
-          {
-            headers: {
-              authorization: `Bearer ${userInfo.token}`,
-            },
-          }
         );
         setOpen(false);
-        if (data == "Doctor added successfully") {
-          router.push("/dashboard/amin/doctor");
+        if (data == "Ambulance added successfully") {
+          router.push("/dashboard/admin/ambulance");
           Swal.fire("Success", data, "success").then((result) => {
             if (result.isConfirmed) {
               router.reload(window.location.pathname);
             }
           });
-        } else if (data == "Sorry, this doctor already exists") {
+        } else if (data == "Sorry, this ambulance already exists") {
           Swal.fire("Warning", data, "warning");
         } else {
           Swal.fire("Error", data, "error");
@@ -106,7 +79,7 @@ export default function AddMedicine() {
             variant="contained"
             color="error"
             size="small"
-            onClick={() => router.push("/dashboard/admin/medicine")}
+            onClick={() => router.push("/dashboard/admin/ambulance")}
           >
             Cancel
           </Button>
@@ -117,7 +90,7 @@ export default function AddMedicine() {
             color="secondary"
             sx={{ color: "#FFFFFF" }}
           >
-            Add Medicine
+            Add Ambulance
           </Button>
         </CreateFormButtonSpacer>
       </Stack>
