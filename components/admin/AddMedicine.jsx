@@ -23,7 +23,7 @@ export default function AddMedicine() {
     e.preventDefault();
     Swal.fire({
       title: "Are you sure?",
-      text: "Want to add this doctor",
+      text: "Want to add this medicine",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -33,26 +33,15 @@ export default function AddMedicine() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         setOpen(true);
-        const { data } = await axios.post(
-          `/api/doctor/create`,
-          {
-            fullName,
-            departmentName,
-            phone,
-            password,
-            gender,
-            email,
-            roomNumber,
-          },
-          {
-            headers: {
-              authorization: `Bearer ${userInfo.token}`,
-            },
-          }
-        );
+        const { data } = await axios.post(`/api/admin/addMedicine`, {
+          medicineName,
+          brand,
+          price: Number(price),
+          quantity: Number(quantity),
+        });
         setOpen(false);
-        if (data == "Doctor added successfully") {
-          router.push("/dashboard/amin/doctor");
+        if (data == "Medicine added successfully") {
+          router.push("/dashboard/admin/medicine");
           Swal.fire("Success", data, "success").then((result) => {
             if (result.isConfirmed) {
               router.reload(window.location.pathname);
@@ -66,7 +55,7 @@ export default function AddMedicine() {
       }
     });
   };
- 
+
   return (
     <React.Fragment>
       <Stack spacing={2} component="form" onSubmit={handelSubmit}>
@@ -83,7 +72,6 @@ export default function AddMedicine() {
             setMedicineName(e.target.value);
           }}
         />
-
         <TextField
           label="Brand"
           type="text"
@@ -94,6 +82,18 @@ export default function AddMedicine() {
           color="secondary"
           onChange={(e) => {
             setBrand(e.target.value);
+          }}
+        />{" "}
+        <TextField
+          label="Price"
+          type="number"
+          placeholder="Enter price"
+          size="small"
+          required
+          fullWidth
+          color="secondary"
+          onChange={(e) => {
+            setPrice(e.target.value);
           }}
         />
         <TextField
@@ -108,7 +108,6 @@ export default function AddMedicine() {
             setQuantity(e.target.value);
           }}
         />
-
         <CreateFormButtonSpacer>
           <Button
             type="button"
