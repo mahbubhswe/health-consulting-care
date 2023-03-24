@@ -8,75 +8,76 @@ datasource db {
 }
 
 model Admin {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  fullName        String
-  phone       String   @unique
-  email       String   @unique
-  password    String
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  fullName String
+  phone    String @unique
+  email    String @unique
+  password String
 }
 
 model Doctor {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  fullName        String
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  fullName       String
   departmentName String
-  phone       String   @unique
-  email       String   @unique
-  gender      String
-  roomNumber Int
-  password    String
-    appointment Appointment[]
+  phone          String        @unique
+  email          String        @unique
+  gender         String
+  roomNumber     Int
+  password       String
+  appointment    Appointment[]
 
   joiningDate DateTime @default(now())
 }
 
 model Patient {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  fullName        String
-  phone       String   @unique
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  fullName    String
+  phone       String        @unique
   gender      String
   password    String
   appointment Appointment[]
-  joiningDate DateTime @default(now())
+  joiningDate DateTime      @default(now())
 }
 
 model Appointment {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  patient      Patient     @relation(fields: [patientPhone], references: [phone],onDelete: Cascade)
-  patientPhone String
-    doctor      Doctor     @relation(fields: [doctorPhone], references: [phone],onDelete: Cascade)
-  doctorPhone String
-  doctorName String
-    departmentName String
-  roomNumber Int
-  status String @default("Panding")
-  time    String
+  id             String  @id @default(auto()) @map("_id") @db.ObjectId
+  patient        Patient @relation(fields: [patientPhone], references: [phone], onDelete: Cascade)
+  patientPhone   String
+  doctor         Doctor  @relation(fields: [doctorPhone], references: [phone], onDelete: Cascade)
+  doctorPhone    String
+  doctorName     String
+  departmentName String
+  roomNumber     Int
+  status         String  @default("Panding")
+  time           String
 }
 
-model Medicine{
-   id          String   @id @default(auto()) @map("_id") @db.ObjectId
+model Medicine {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
   medicineName String
-  brand String
-  price Int
-  quantity Int
+  brand        String
+  price        Int
+  quantity     Int
 }
 
-model BloodBank{
-   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  phone       String   @unique
-  bloodGroup       String   @unique
-  address    String
-  gender String
+model BloodBank {
+  id               String @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  phone            String @unique
+  bloodGroup       String @unique
+  address          String
+  gender           String
   lastDonationDate String
 }
-model Ambulance{
-   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  ambulanceNumber Int @unique
-}
-model Cabin{
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  roomNumber Int 
-  cabinNumber Int
-  status String @default("free")
+
+model Ambulance {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  ambulanceNumber Int    @unique
 }
 
+model Cabin {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  roomNumber  Int
+  cabinNumber Int
+  status      String @default("free")
+}
