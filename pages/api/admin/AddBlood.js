@@ -3,18 +3,18 @@ import { prisma } from "../../../utils/db.ts";
 const handler = nc();
 handler.post(async (req, res) => {
   try {
-    //check doctor exist or not
+    //check person exist or not
     const isExist = await prisma.BloodBank.findUnique({
       where: { phone: String(req.body.phone) },
     });
     if (isExist) {
-      res.send("Sorry, this persone already exists");
+      res.send("Sorry, this doner already exists");
     } else {
       await prisma.BloodBank.create({
-        ...req.body,
+        data:req.body,
       });
 
-      res.send("Blood added successfully");
+      res.send("Doner added successfully");
     }
   } catch (error) {
     res.send(error.message);

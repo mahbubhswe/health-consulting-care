@@ -4,7 +4,7 @@ const handler = nc();
 handler.post(async (req, res) => {
   try {
     //check cabine exist or not
-    const isExist = await prisma.Cabin.findUnique({
+    const isExist = await prisma.Cabin.findMany({
       where: {
         AND: [
           { roomNumber: req.body.roomNumber },
@@ -12,11 +12,11 @@ handler.post(async (req, res) => {
         ],
       },
     });
-    if (isExist) {
+    if (isExist.length>0) {
       res.send("Sorry, this cabine already exists");
     } else {
       await prisma.Cabin.create({
-        ...req.body,
+        data: req.body,
       });
 
       res.send("Cabin added successfully");

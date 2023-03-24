@@ -34,7 +34,7 @@ export default function AddMedicine() {
     e.preventDefault();
     Swal.fire({
       title: "Are you sure?",
-      text: "Want to add this doctor",
+      text: "Want to add this doner",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -45,15 +45,14 @@ export default function AddMedicine() {
       if (result.isConfirmed) {
         setOpen(true);
         const { data } = await axios.post(
-          `/api/doctor/create`,
+          `/api/admin/addBlood`,
           {
-            fullName,
-            departmentName,
+            name,
+            address,
             phone,
-            password,
+            bloodGroup,
             gender,
-            email,
-            roomNumber,
+            lastDonationDate,
           },
           {
             headers: {
@@ -62,14 +61,14 @@ export default function AddMedicine() {
           }
         );
         setOpen(false);
-        if (data == "Doctor added successfully") {
-          router.push("/dashboard/amin/doctor");
+        if (data == "Doner added successfully") {
+          router.push("/dashboard/admin/blood-bank");
           Swal.fire("Success", data, "success").then((result) => {
             if (result.isConfirmed) {
               router.reload(window.location.pathname);
             }
           });
-        } else if (data == "Sorry, this doctor already exists") {
+        } else if (data == "Sorry, this doner already exists") {
           Swal.fire("Warning", data, "warning");
         } else {
           Swal.fire("Error", data, "error");

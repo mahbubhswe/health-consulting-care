@@ -75,8 +75,8 @@ model Ambulance{
 }
 model Cabin{
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  roomNumber Int @unique
-  cabinNumber Int @unique
+  roomNumber Int 
+  cabinNumber Int
   status String @default("free")
 }
 

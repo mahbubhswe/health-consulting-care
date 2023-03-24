@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 import { useLocalStorage } from "@rehooks/local-storage";
 export default function AddMedicine() {
   const [open, setOpen] = React.useState(false);
-  const [cabineNumber, setCabineNumber] = React.useState();
+  const [cabinNumber, setCabinNumber] = React.useState();
   const [roomNumber, setRoomNumber] = React.useState();
   const router = useRouter();
   const [userInfo] = useLocalStorage("userInfo");
@@ -21,7 +21,7 @@ export default function AddMedicine() {
     e.preventDefault();
     Swal.fire({
       title: "Are you sure?",
-      text: "Want to add this doctor",
+      text: "Want to add this cabin",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -31,32 +31,19 @@ export default function AddMedicine() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         setOpen(true);
-        const { data } = await axios.post(
-          `/api/doctor/create`,
-          {
-            fullName,
-            departmentName,
-            phone,
-            password,
-            gender,
-            email,
-            roomNumber,
-          },
-          {
-            headers: {
-              authorization: `Bearer ${userInfo.token}`,
-            },
-          }
-        );
+        const { data } = await axios.post(`/api/admin/addCabin`, {
+          cabinNumber: Number(cabinNumber),
+          roomNumber: Number(roomNumber),
+        });
         setOpen(false);
-        if (data == "Doctor added successfully") {
-          router.push("/dashboard/amin/doctor");
+        if (data == "Cabin added successfully") {
+          router.push("/dashboard/admin/cabin");
           Swal.fire("Success", data, "success").then((result) => {
             if (result.isConfirmed) {
               router.reload(window.location.pathname);
             }
           });
-        } else if (data == "Sorry, this doctor already exists") {
+        } else if (data == "Sorry, this cabin already exists") {
           Swal.fire("Warning", data, "warning");
         } else {
           Swal.fire("Error", data, "error");
@@ -94,10 +81,9 @@ export default function AddMedicine() {
           fullWidth
           color="secondary"
           onChange={(e) => {
-            setCabineNumber(e.target.value);
+            setCabinNumber(e.target.value);
           }}
         />
-       
 
         <CreateFormButtonSpacer>
           <Button
