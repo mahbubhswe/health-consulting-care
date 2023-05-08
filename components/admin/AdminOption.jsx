@@ -74,7 +74,7 @@ export default function AdminOptions() {
       </Box>
       <ListItem disablePadding>
         <ListItemButton
-          onClick={() => router.push("/dashboard/admin/patient-etails")}
+          onClick={() => router.push("/dashboard/admin/patient-details")}
         >
           <ListItemIcon>
             <Image
@@ -104,7 +104,6 @@ export default function AdminOptions() {
           <ListItemText>Genarate Report</ListItemText>
         </ListItemButton>
       </ListItem>
-
       <ListItem disablePadding>
         <ListItemButton
           onClick={() => router.push("/dashboard/admin/medicine")}
@@ -136,6 +135,22 @@ export default function AdminOptions() {
           </ListItemIcon>
           <ListItemText>Ambulance</ListItemText>
         </ListItemButton>
+      </ListItem>{" "}
+      <ListItem disablePadding>
+        <ListItemButton
+          onClick={() => router.push("/dashboard/admin/ambulance-request")}
+        >
+          <ListItemIcon>
+            <Image
+              src="/icons/ambulance.png"
+              height={25}
+              width={25}
+              quality={100}
+              alt="icon"
+            />
+          </ListItemIcon>
+          <ListItemText>Ambulance Request</ListItemText>
+        </ListItemButton>
       </ListItem>
       <ListItem disablePadding>
         <ListItemButton
@@ -166,8 +181,23 @@ export default function AdminOptions() {
           </ListItemIcon>
           <ListItemText>Cabin</ListItemText>
         </ListItemButton>
+      </ListItem>{" "}
+      <ListItem disablePadding>
+        <ListItemButton
+          onClick={() => router.push("/dashboard/admin/cabin-request")}
+        >
+          <ListItemIcon>
+            <Image
+              src="/icons/cabine.png"
+              height={25}
+              width={25}
+              quality={100}
+              alt="icon"
+            />
+          </ListItemIcon>
+          <ListItemText>Cabin Request</ListItemText>
+        </ListItemButton>
       </ListItem>
-
       <ListItem disablePadding>
         <ListItemButton onClick={() => setOpen(!open)}>
           <ListItemIcon>
@@ -183,7 +213,6 @@ export default function AdminOptions() {
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
       </ListItem>
-
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List dense={true} disablePadding>
           <ListItemButton

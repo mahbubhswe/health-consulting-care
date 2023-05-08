@@ -25,7 +25,7 @@ export default function AdminOptions() {
   return (
     <List dense={true}>
       <ListItem disablePadding>
-        <ListItemButton onClick={() => router.push("/dashboard/admin")}>
+        <ListItemButton onClick={() => router.push("/dashboard/doctor")}>
           <ListItemIcon>
             <Image
               src="/icons/dashboard.png"
@@ -40,9 +40,7 @@ export default function AdminOptions() {
       </ListItem>
       <Box>
         <ListItem disablePadding>
-          <ListItemButton
-            onClick={() => router.push("/dashboard/doctor/list")}
-          >
+          <ListItemButton onClick={() => router.push("/dashboard/doctor/list")}>
             <ListItemIcon>
               <Image
                 src="/icons/doctor.png"
@@ -57,7 +55,7 @@ export default function AdminOptions() {
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton
-            onClick={() => router.push("/dashboard/admin/appointment")}
+            onClick={() => router.push("/dashboard/doctor/appointment")}
           >
             <ListItemIcon>
               <Image
@@ -74,7 +72,7 @@ export default function AdminOptions() {
       </Box>
       <ListItem disablePadding>
         <ListItemButton
-          onClick={() => router.push("/dashboard/admin/patient-etails")}
+          onClick={() => router.push("/dashboard/doctor/patient-details")}
         >
           <ListItemIcon>
             <Image
@@ -90,7 +88,7 @@ export default function AdminOptions() {
       </ListItem>
       <ListItem disablePadding>
         <ListItemButton
-          onClick={() => router.push("/dashboard/admin/genarate-report")}
+          onClick={() => router.push("/dashboard/doctor/genarate-report")}
         >
           <ListItemIcon>
             <Image

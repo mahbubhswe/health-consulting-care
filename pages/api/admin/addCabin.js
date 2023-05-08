@@ -4,15 +4,12 @@ const handler = nc();
 handler.post(async (req, res) => {
   try {
     //check cabine exist or not
-    const isExist = await prisma.Cabin.findMany({
+    const isExist = await prisma.Cabin.count({
       where: {
-        AND: [
-          { roomNumber: req.body.roomNumber },
-          { cabineNumber: req.body.cabineNumber },
-        ],
+        roomAndCabinNumber: req.body.roomAndCabinNumber,
       },
     });
-    if (isExist.length>0) {
+    if (isExist > 0) {
       res.send("Sorry, this cabine already exists");
     } else {
       await prisma.Cabin.create({

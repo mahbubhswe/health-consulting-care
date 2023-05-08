@@ -7,10 +7,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import ShowDataGrid from "../ShowDataGrid";
+import { ButtonGroup, Tooltip } from "@mui/material";
 export default function ManageCabin({ data }) {
   const [open, setOpen] = React.useState(false);
   const [cabin, setCabin] = React.useState(data);
@@ -38,9 +39,7 @@ export default function ManageCabin({ data }) {
     }).then(async (result) => {
       if (result.isConfirmed) {
         setOpen(true);
-        const { data } = await axios.delete(
-          `/api/admin/deleteCabin?id=${id}`
-        );
+        const { data } = await axios.delete(`/api/admin/deleteCabin?id=${id}`);
         setOpen(false);
         if (data == "Cabin deleted successfully") {
           Swal.fire("Success", data, "success").then((result) => {
@@ -57,21 +56,65 @@ export default function ManageCabin({ data }) {
   //create columns for data grid
   const columns = React.useMemo(
     () => [
-      { field: "roomNumber", headerName: "Room Number", width: "200" },
-      { field: "cabinNumber", headerName: "Cabin Number", width: "200" },
+      {
+        field: "roomAndCabinNumber",
+        headerName: "Room And Cabin Number",
+        width: "200",
+      },
+      {
+        field: "status",
+        headerName: "Status",
+        width: "200",
+      },
       {
         field: "id",
         headerName: "Action",
         width: "200",
         renderCell: (params) => {
           return (
-            <IconButton
-              variant="contained"
-              color="error"
-              onClick={() => recordDeletingFun(params.row.id)}
-            >
-              <DeleteIcon />
-            </IconButton>
+            <ButtonGroup>
+              <Tooltip title={params.row.status}>
+                <IconButton
+                  disabled={params.row.status == "approved" ? true : false}
+                  onClick={() => {
+                    Swal.fire({
+                      title: "Do you want to change cabin status",
+                      showCancelButton: true,
+                      confirmButtonText: "Change",
+                      showLoaderOnConfirm: true,
+                      reverseButtons: true,
+                      cancelButtonColor: "red",
+                      allowOutsideClick: false,
+                      preConfirm: async () => {
+                        const { data } = await axios.put(
+                          `/api/admin/changeCabinStatus?id=${params.row.id}&status=${params.row.status}`
+                        );
+                        if (data == "Request change successfully!") {
+                          Swal.fire("Success", data, "success").then(
+                            (result) => {
+                              if (result.isConfirmed) {
+                                window.location.reload();
+                              }
+                            }
+                          );
+                        } else {
+                          Swal.showValidationMessage(`Request failed: ${data}`);
+                        }
+                      },
+                    });
+                  }}
+                >
+                  <ChangeCircleIcon color="secondary" />
+                </IconButton>
+              </Tooltip>
+              <IconButton
+                variant="contained"
+                color="error"
+                onClick={() => recordDeletingFun(params.row.id)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </ButtonGroup>
           );
         },
       },

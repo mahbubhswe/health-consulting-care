@@ -8,17 +8,22 @@ import CreateFormButtonSpacer from "../CreateFormButtonSpacer";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
-export default function AddMedicine() {
-  const [open, setOpen] = React.useState(false);
-  const [roomNadCabinNumber, setRoomNadCabinNumber] = React.useState();
-  const router = useRouter();
 
+import { useLocalStorage } from "@rehooks/local-storage";
+import { Autocomplete } from "@mui/material";
+export default function CreateAmbulanceBooking({ data }) {
+  const [open, setOpen] = React.useState(false);
+  const router = useRouter();
+  const [userInfo] = useLocalStorage("userInfo");
+  const [roomAndCabinNumber, setRoomAndCabinNumber] = React.useState();
+  const [date, setDate] = React.useState(new Date().getFullYear());
+  const [time, setTime] = React.useState(new Date().getTime());
   //create employee
   const handelSubmit = async (e) => {
     e.preventDefault();
     Swal.fire({
       title: "Are you sure?",
-      text: "Want to add this cabin",
+      text: "Want to sent this request",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -28,52 +33,77 @@ export default function AddMedicine() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         setOpen(true);
-        const { data } = await axios.post(`/api/admin/addCabin`, {
-          roomAndCabinNumber: roomNadCabinNumber,
+        const { data } = await axios.post(`/api/patient/cabin/create`, {
+          name: userInfo.fullName,
+          phone: userInfo.phone,
+          roomAndCabinNumber: roomAndCabinNumber,
+          date: date,
+          time: time,
         });
         setOpen(false);
-        if (data == "Cabin added successfully") {
-          router.push("/dashboard/admin/cabin");
+        if (data == "Cabin booking request has been sent successfully!") {
           Swal.fire("Success", data, "success").then((result) => {
             if (result.isConfirmed) {
               router.reload(window.location.pathname);
             }
           });
-        } else if (data == "Sorry, this cabin already exists") {
-          Swal.fire("Warning", data, "warning");
         } else {
           Swal.fire("Error", data, "error");
         }
       }
     });
   };
-  //phone input validation
-  const handlerPhoneinput = (newValue) => {
-    setPhone(newValue);
-  };
+
   return (
     <React.Fragment>
       <Stack spacing={2} component="form" onSubmit={handelSubmit}>
+        <Autocomplete
+          options={
+            data.length != 0
+              ? data.map((option) => option.roomAndCabinNumber)
+              : []
+          }
+          onChange={(event, newValue) => {
+            setRoomAndCabinNumber(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              size="small"
+              required
+              fullWidth
+              color="secondary"
+              label="Select room and cabin number"
+            />
+          )}
+        />
         <TextField
-          label="Room And Cabin Number"
-          type="text"
-          placeholder="Enter room and cabin number"
           size="small"
           required
           fullWidth
           color="secondary"
-          onChange={(e) => {
-            setRoomNadCabinNumber(e.target.value);
-          }}
+          label="Select date"
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
         />
-
+        <TextField
+          size="small"
+          required
+          fullWidth
+          color="secondary"
+          label="Select time"
+          type="time"
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+        />
         <CreateFormButtonSpacer>
           <Button
             type="button"
             variant="contained"
             color="error"
             size="small"
-            onClick={() => router.push("/dashboard/admin/cabin")}
+            onClick={() => router.push("/dashboard/patient/cabin-booking/")}
           >
             Cancel
           </Button>
@@ -84,7 +114,7 @@ export default function AddMedicine() {
             color="secondary"
             sx={{ color: "#FFFFFF" }}
           >
-            Add Cabin
+            Book Now
           </Button>
         </CreateFormButtonSpacer>
       </Stack>

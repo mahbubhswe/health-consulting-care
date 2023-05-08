@@ -1,57 +1,29 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { useRouter } from "next/router";
-import axios from "axios";
-import Swal from "sweetalert2";
-import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import ShowDataGrid from "../ShowDataGrid";
-import { ButtonGroup, Tooltip } from "@mui/material";
-export default function ManageAmbulance({ data }) {
-  const [open, setOpen] = React.useState(false);
-  const router = useRouter();
+import { ButtonGroup, IconButton, Tooltip } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Swal from "sweetalert2";
+import axios from "axios";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
-  //record deleting function
-  async function recordDeletingFun(id) {
-    Swal.fire({
-      title: "Are you sure?",
-      text: `You want to delete this ambulance`,
-      icon: "question",
-      showCancelButton: true,
-      cancelButtonColor: "red",
-      confirmButtonText: "Yes",
-      reverseButtons: true,
-      allowOutsideClick: false,
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        setOpen(true);
-        const { data } = await axios.delete(
-          `/api/admin/deleteAmbulance?id=${id}`
-        );
-        setOpen(false);
-        if (data == "Ambulance deleted successfully") {
-          Swal.fire("Success", data, "success").then((result) => {
-            if (result.isConfirmed) {
-              router.reload(window.location.pathname);
-            }
-          });
-        } else {
-          Swal.fire("Error", data, "error");
-        }
-      }
-    });
-  }
+export default function ManageAppointmentRequest({ data }) {
+  const [open, setOpen] = React.useState(false);
+  const [dataRecord] = React.useState(data);
+  const router = useRouter();
+  //fees filtering function based on phone
+
   //create columns for data grid
   const columns = React.useMemo(
     () => [
-      {
-        field: "ambulanceNumber",
-        headerName: "Ambulance Number",
-        width: "200",
-      },
+      { field: "patientPhone", headerName: "Patient Phone", width: "200" },
+      { field: "doctorPhone", headerName: "Doctor Phone", width: "200" },
+      { field: "doctorName", headerName: "Doctor Name", width: "200" },
+      { field: "departmentName", headerName: "Department Name", width: "200" },
+      { field: "roomNumber", headerName: "Room Number", width: "200" },
+      { field: "time", headerName: "Time", width: "200" },
       {
         field: "status",
         headerName: "Status",
@@ -69,18 +41,18 @@ export default function ManageAmbulance({ data }) {
                   disabled={params.row.status == "approved" ? true : false}
                   onClick={() => {
                     Swal.fire({
-                      title: "Do you want to change ambulance status",
+                      title: "Do you want to approve this request.",
                       showCancelButton: true,
-                      confirmButtonText: "Change",
+                      confirmButtonText: "Approve request",
                       showLoaderOnConfirm: true,
                       reverseButtons: true,
                       cancelButtonColor: "red",
                       allowOutsideClick: false,
                       preConfirm: async () => {
                         const { data } = await axios.put(
-                          `/api/admin/changeAmbulanceStatus?id=${params.row.id}&status=${params.row.status}`
+                          `/api/admin/appointment/approve?id=${params.row.id}`
                         );
-                        if (data == "Request change successfully!") {
+                        if (data == "Appointment approved successfully") {
                           Swal.fire("Success", data, "success").then(
                             (result) => {
                               if (result.isConfirmed) {
@@ -110,22 +82,41 @@ export default function ManageAmbulance({ data }) {
         },
       },
     ],
-    [data]
+    [dataRecord]
   );
-
+  //record deleting function
+  async function recordDeletingFun(id) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You want to delete this request`,
+      icon: "question",
+      showCancelButton: true,
+      cancelButtonColor: "red",
+      confirmButtonText: "Yes",
+      reverseButtons: true,
+      allowOutsideClick: false,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setOpen(true);
+        const { data } = await axios.delete(
+          `/api/admin/appointment/delete?id=${id}`
+        );
+        setOpen(false);
+        if (data == "Appointment deleted successfully") {
+          Swal.fire("Success", data, "success").then((result) => {
+            if (result.isConfirmed) {
+              router.reload(window.location.pathname);
+            }
+          });
+        } else {
+          Swal.fire("Error", data, "error");
+        }
+      }
+    });
+  }
   return (
     <React.Fragment>
-      <Button
-        sx={{ minWidth: "160px", color: "#ffffff" }}
-        size="small"
-        variant="contained"
-        color="secondary"
-        onClick={() => router.push("/dashboard/admin/ambulance/create")}
-      >
-        Add Ambulance
-      </Button>
-
-      <ShowDataGrid rows={data} columns={columns} />
+      <ShowDataGrid rows={dataRecord} columns={columns} />
       <Backdrop open={open}>
         <CircularProgress color="secondary" />
       </Backdrop>

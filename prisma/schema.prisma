@@ -48,7 +48,7 @@ model Appointment {
   doctorName     String
   departmentName String
   roomNumber     Int
-  status         String  @default("Panding")
+  status         String  @default("panding")
   time           String
 }
 
@@ -73,11 +73,32 @@ model BloodBank {
 model Ambulance {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   ambulanceNumber Int    @unique
+    status      String @default("free")
 }
-
+model AmbulanceBooking {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  phone String
+  pickupPoint String
+  destination String
+  date String
+  time String
+  ambulanceNumber Int
+  status String  @default("pending")
+  createdAt DateTime      @default(now())
+}
 model Cabin {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
-  roomNumber  Int
-  cabinNumber Int
+  roomAndCabinNumber  String @unique
   status      String @default("free")
+}
+model CabinBooking {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  phone String
+  date String
+  time String
+roomAndCabinNumber String
+  status String  @default("pending")
+  createdAt DateTime      @default(now())
 }

@@ -37,7 +37,7 @@ export default function AdminLogin() {
       e.target.reset();
       writeStorage("userInfo", data);
       Cookies.set("token", data.token);
-      router.replace("/dashboard/admin");
+      router.replace("/dashboard/doctor");
     } else {
       Swal.fire("Failed to login", data, "error");
     }

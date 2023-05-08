@@ -6,16 +6,9 @@ import ShowDataGrid from "../ShowDataGrid";
 import { Button } from "@mui/material";
 export default function ManageAppointment({ data }) {
   const [open, setOpen] = React.useState(false);
-  const [doctors, setDoctors] = React.useState(data);
+  const [dataRecord] = React.useState(data);
   const router = useRouter();
   //fees filtering function based on phone
-  async function recordFilteringFun(fullName) {
-    if (fullName == "") {
-      setDoctors(data);
-    } else {
-      setDoctors(data.filter((item) => item.fullName == fullName));
-    }
-  }
 
   //create columns for data grid
   const columns = React.useMemo(
@@ -26,7 +19,7 @@ export default function ManageAppointment({ data }) {
       { field: "roomNumber", headerName: "Room Number", width: "200" },
       { field: "status", headerName: "Status", width: "200" },
     ],
-    [doctors]
+    [dataRecord]
   );
 
   return (
@@ -39,7 +32,7 @@ export default function ManageAppointment({ data }) {
         Create Appointment
       </Button>
 
-      <ShowDataGrid rows={doctors} columns={columns} />
+      <ShowDataGrid rows={dataRecord} columns={columns} />
       <Backdrop open={open}>
         <CircularProgress color="secondary" />
       </Backdrop>

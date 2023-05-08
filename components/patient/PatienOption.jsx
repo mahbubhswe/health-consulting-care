@@ -74,7 +74,7 @@ export default function PatientOptions() {
       </Box>
       <ListItem disablePadding>
         <ListItemButton
-          onClick={() => router.push("/dashboard/admin/patient-etails")}
+          onClick={() => router.push("/dashboard/patient/check-medicine")}
         >
           <ListItemIcon>
             <Image
@@ -90,7 +90,7 @@ export default function PatientOptions() {
       </ListItem>
       <ListItem disablePadding>
         <ListItemButton
-          onClick={() => router.push("/dashboard/admin/genarate-report")}
+          onClick={() => router.push("/dashboard/patient/ambulance-booking")}
         >
           <ListItemIcon>
             <Image
@@ -106,7 +106,7 @@ export default function PatientOptions() {
       </ListItem>
       <ListItem disablePadding>
         <ListItemButton
-          onClick={() => router.push("/dashboard/admin/genarate-report")}
+          onClick={() => router.push("/dashboard/patient/cabin-booking")}
         >
           <ListItemIcon>
             <Image
@@ -122,7 +122,7 @@ export default function PatientOptions() {
       </ListItem>
       <ListItem disablePadding>
         <ListItemButton
-          onClick={() => router.push("/dashboard/admin/genarate-report")}
+          onClick={() => router.push("/dashboard/patient/check-blood-bank")}
         >
           <ListItemIcon>
             <Image
