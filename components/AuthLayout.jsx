@@ -3,6 +3,7 @@ import Head from "next/head";
 import Container from "@mui/material/Container";
 
 import Lottie from "lottie-web";
+import { Paper } from "@mui/material";
 export default function Layout({ pageTitle, children }) {
   const container = React.useRef(null);
   React.useEffect(() => {
@@ -20,12 +21,14 @@ export default function Layout({ pageTitle, children }) {
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <div
-    
-      >
-        <p style={{ height: "200px" }} ref={container}></p>
-        <Container maxWidth="sm">{children}</Container>
-      </div>
+      <main>
+        <Container maxWidth="sm" sx={{mt:"25px"}}>
+          <Paper sx={{p:"20px"}} variant="outlined">
+            <p style={{ height: "200px" }} ref={container}></p>
+            {children}
+          </Paper>
+        </Container>
+      </main>
     </React.Fragment>
   );
 }
