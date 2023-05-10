@@ -14,17 +14,26 @@ import {
   Radio,
   RadioGroup,
   Typography,
+  Container,
+  Autocomplete,
 } from "@mui/material";
 import Link from "next/link";
+
 export default function PatientRegistration() {
   const [open, setOpen] = React.useState(false);
+  const [height, setHeight] = React.useState();
+  const [weight, setWeight] = React.useState();
+  const [bloodGroup, setBloodGroup] = React.useState();
+  const [sex, setSex] = React.useState();
+  const [dateOfBirth, setDateOfBirth] = React.useState();
+  const [maritalStatus, setMaritalStatus] = React.useState();
   const [fullName, setFullName] = React.useState();
+  const [address, setAddress] = React.useState();
   const [phone, setPhone] = React.useState(0);
   const [password, setPassword] = React.useState();
-  const [gender, setGender] = React.useState();
   const router = useRouter();
 
-  //create employee
+  //create patient
   const handelSubmit = async (e) => {
     e.preventDefault();
     Swal.fire({
@@ -42,8 +51,14 @@ export default function PatientRegistration() {
         const { data } = await axios.post(`/api/patient/create`, {
           fullName,
           phone,
+          height,
+          weight,
+          bloodGroup,
+          sex,
+          dateOfBirth,
+          maritalStatus,
           password,
-          gender,
+          address,
         });
         setOpen(false);
         if (data == "Account created successfully") {
@@ -62,7 +77,8 @@ export default function PatientRegistration() {
   };
 
   return (
-    <React.Fragment>
+    <>
+      {" "}
       <Stack spacing={2} component="form" onSubmit={handelSubmit}>
         <Typography
           variant="h5"
@@ -70,7 +86,7 @@ export default function PatientRegistration() {
           align="center"
           sx={{ color: "gray" }}
         >
-          Create a new account
+          Create a new patient account
         </Typography>
         <TextField
           label="Name"
@@ -79,7 +95,6 @@ export default function PatientRegistration() {
           size="small"
           required
           fullWidth
-          name="name"
           color="secondary"
           onChange={(e) => {
             setFullName(e.target.value);
@@ -92,14 +107,77 @@ export default function PatientRegistration() {
           size="small"
           required
           fullWidth
-          name="phone"
           color="secondary"
           onChange={(e) => {
             setPhone(e.target.value);
           }}
         />
-    
-
+        <TextField
+          label="Adddress"
+          type="text"
+          placeholder="Enter address"
+          size="small"
+          required
+          fullWidth
+          color="secondary"
+          onChange={(e) => {
+            setAddress(e.target.value);
+          }}
+        />
+        <TextField
+          label="Height"
+          type="text"
+          placeholder="Enter height"
+          size="small"
+          required
+          fullWidth
+          color="secondary"
+          onChange={(e) => {
+            setHeight(e.target.value);
+          }}
+        />{" "}
+        <TextField
+          label="Weight"
+          type="number"
+          placeholder="Enter weight"
+          size="small"
+          required
+          fullWidth
+          color="secondary"
+          onChange={(e) => {
+            setWeight(e.target.value);
+          }}
+        />{" "}
+        <Autocomplete
+          options={["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"].map(
+            (option) => option
+          )}
+          onChange={(event, newValue) => {
+            setBloodGroup(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              size="small"
+              required
+              fullWidth
+              color="secondary"
+              label="Select Blood Group"
+            />
+          )}
+        />
+        <TextField
+          label="Date of Birth"
+          type="date"
+          size="small"
+          required
+          fullWidth
+          color="secondary"
+          onChange={(e) => {
+            setDateOfBirth(e.target.value);
+          }}
+        />{" "}
+  
         <TextField
           label="Password"
           type="password"
@@ -112,11 +190,10 @@ export default function PatientRegistration() {
             setPassword(e.target.value);
           }}
         />
-
         <FormControl
           required
           onChange={(e) => {
-            setGender(e.target.value);
+            setSex(e.target.value);
           }}
         >
           <FormLabel>Gender</FormLabel>
@@ -132,8 +209,27 @@ export default function PatientRegistration() {
               label="Female"
             />
           </RadioGroup>
+        </FormControl>{" "}
+        <FormControl
+          required
+          onChange={(e) => {
+            setMaritalStatus(e.target.value);
+          }}
+        >
+          <FormLabel>Marital Status</FormLabel>
+          <RadioGroup row>
+            <FormControlLabel
+              value="single"
+              control={<Radio color="secondary" size="small" />}
+              label="Single"
+            />
+            <FormControlLabel
+              value="married"
+              control={<Radio color="secondary" size="small" />}
+              label="Married"
+            />
+          </RadioGroup>
         </FormControl>
-
         <Button
           type="submit"
           variant="contained"
@@ -151,6 +247,6 @@ export default function PatientRegistration() {
       <Backdrop open={open}>
         <CircularProgress color="secondary" />
       </Backdrop>
-    </React.Fragment>
+    </>
   );
 }

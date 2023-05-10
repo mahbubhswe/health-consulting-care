@@ -1,15 +1,19 @@
 import nc from "next-connect";
-import { isAuth } from "../../../utils/auth";
 import { prisma } from "../../../utils/db.ts";
 const handler = nc();
-handler.use(isAuth);
 handler.get(async (req, res) => {
   try {
-    const student = await prisma.student.findMany();
-    const teacher = await prisma.teacher.findMany();
-    const payment = await prisma.payment.findMany();
-
-    res.send(classList);
+    const doctor = await prisma.Doctor.count();
+    const patient = await prisma.Patient.count();
+    const bloodBank = await prisma.BloodBank.count();
+    const patientReport = await prisma.PatientReport.count();
+    const obj = {
+      doctor: doctor ? doctor : 0,
+      patient: patient ? patient : 0,
+      bloodBank: bloodBank ? bloodBank : 0,
+      patientReport: patientReport ? patientReport : 0,
+    };
+    res.send(obj);
   } catch (error) {
     res.send(error.message);
   }

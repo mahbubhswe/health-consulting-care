@@ -25,7 +25,6 @@ model Doctor {
   roomNumber     Int
   password       String
   appointment    Appointment[]
-
   joiningDate DateTime @default(now())
 }
 
@@ -33,11 +32,30 @@ model Patient {
   id          String        @id @default(auto()) @map("_id") @db.ObjectId
   fullName    String
   phone       String        @unique
-  gender      String
+  height String
+  weight Int
+  address String
+  bloodGroup String
+  sex String
+  dateOfBirth String
+  maritalStatus String
   password    String
   appointment Appointment[]
+  patientReport PatientReport[]
   joiningDate DateTime      @default(now())
 }
+
+model PatientReport {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  testName String
+  report String
+  description String
+  reportedBy String
+   patient         Patient  @relation(fields: [patientPhone], references: [phone], onDelete: Cascade)
+patientPhone String
+ createdAt DateTime      @default(now())
+}
+
 
 model Appointment {
   id             String  @id @default(auto()) @map("_id") @db.ObjectId

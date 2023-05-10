@@ -1,6 +1,5 @@
 import nc from "next-connect";
 import bcryptjs from "bcryptjs";
-import { isAuth } from "../../../utils/auth";
 import { prisma } from "../../../utils/db.ts";
 const handler = nc();
 handler.post(async (req, res) => {
@@ -12,12 +11,29 @@ handler.post(async (req, res) => {
     if (isExist) {
       res.send("Sorry, this patient already exists");
     } else {
-      const { fullName, phone, password, gender } = req.body;
+      const {
+        fullName,
+        phone,
+        height,
+        weight,
+        bloodGroup,
+        sex,
+        address,
+        dateOfBirth,
+        maritalStatus,
+        password,
+      } = req.body;
       await prisma.Patient.create({
         data: {
-          fullName,
-          phone,
-          gender,
+          fullName: fullName,
+          phone: phone,
+          address: address,
+          height: height,
+          weight: Number(weight),
+          bloodGroup: bloodGroup,
+          sex: sex,
+          dateOfBirth: dateOfBirth,
+          maritalStatus: maritalStatus,
           password: bcryptjs.hashSync(password),
         },
       });

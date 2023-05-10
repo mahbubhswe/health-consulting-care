@@ -1,10 +1,15 @@
 import nc from "next-connect";
 import { prisma } from "../../../utils/db.ts";
 const handler = nc();
-handler.get(async (req, res) => {
+handler.post(async (req, res) => {
   try {
-    const patient = await prisma.Patient.findMany();
-    res.send(patient);
+    await prisma.PatientReport.create({
+      data: {
+        ...req.body,
+      },
+    });
+
+    res.send("Report generated successfully");
   } catch (error) {
     res.send(error.message);
   }

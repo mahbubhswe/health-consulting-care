@@ -1,14 +1,17 @@
 import nc from "next-connect";
 import { prisma } from "../../../utils/db.ts";
 const handler = nc();
-handler.delete(async (req, res) => {
+handler.get(async (req, res) => {
   try {
-    await prisma.Fees.delete({
+    const patient = await prisma.Patient.findUnique({
       where: {
         id: req.query.id,
       },
+      include: {
+        patientReport: true,
+      },
     });
-    res.send("Fees of this class deleted successfully");
+    res.send(patient);
   } catch (error) {
     res.send(error.message);
   }

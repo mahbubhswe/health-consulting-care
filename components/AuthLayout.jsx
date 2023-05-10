@@ -21,10 +21,7 @@ export default function Layout({ pageTitle, children }) {
         <title>{pageTitle}</title>
       </Head>
       <div
-        style={{
-          height: "100vh",
-          background: "#FFFFFF",
-        }}
+    
       >
         <p style={{ height: "200px" }} ref={container}></p>
         <Container maxWidth="sm">{children}</Container>

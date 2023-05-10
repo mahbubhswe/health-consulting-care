@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-export default function MemberOverview({ data }) {
+export default function ItemOverview({ data }) {
   return (
     <Stack
       direction={{ xs: "column", sm: "column", md: "row" }}
@@ -21,7 +21,7 @@ export default function MemberOverview({ data }) {
       >
         <ListItem
           secondaryAction=<Image
-            src="/icons/students.png"
+            src="/icons/doctor.png"
             height={60}
             width={60}
             quality={100}
@@ -30,10 +30,10 @@ export default function MemberOverview({ data }) {
         >
           <ListItemText
             primary=<Typography component="h3" variant="bold">
-              Student
+              Doctor
             </Typography>
             secondary=<Typography component="h4" variant="bold">
-              {data.totalStudent}
+              {data.doctor}
             </Typography>
           />
         </ListItem>
@@ -44,7 +44,7 @@ export default function MemberOverview({ data }) {
       >
         <ListItem
           secondaryAction=<Image
-            src="/icons/teacher.png"
+            src="/icons/petient.png"
             height={60}
             width={60}
             quality={100}
@@ -53,10 +53,10 @@ export default function MemberOverview({ data }) {
         >
           <ListItemText
             primary=<Typography component="h3" variant="bold">
-              Teacher
+              Petient
             </Typography>
             secondary=<Typography component="h4" variant="bold">
-              {data.totalTeacher}
+              {data.patient}
             </Typography>
           />
         </ListItem>
@@ -67,7 +67,7 @@ export default function MemberOverview({ data }) {
       >
         <ListItem
           secondaryAction=<Image
-            src="/icons/user.png"
+            src="/icons/bloodBank.png"
             height={60}
             width={60}
             quality={100}
@@ -76,10 +76,10 @@ export default function MemberOverview({ data }) {
         >
           <ListItemText
             primary=<Typography component="h3" variant="bold">
-              Staff
+              Doner
             </Typography>
             secondary=<Typography component="h4" variant="bold">
-              {data.totalStaff}
+              {data.bloodBank}
             </Typography>
           />
         </ListItem>
@@ -90,7 +90,7 @@ export default function MemberOverview({ data }) {
       >
         <ListItem
           secondaryAction=<Image
-            src="/icons/employee.png"
+            src="/icons/report.png"
             height={60}
             width={60}
             quality={100}
@@ -99,10 +99,10 @@ export default function MemberOverview({ data }) {
         >
           <ListItemText
             primary=<Typography component="h3" variant="bold">
-              Employee
+              Report
             </Typography>
             secondary=<Typography component="h4" variant="bold">
-              {data.totalEmployee}
+              {data.patientReport}
             </Typography>
           />
         </ListItem>
