@@ -3,11 +3,9 @@ import PrimaryAnim from "./PrimaryAnim";
 import Typewriter from "typewriter-effect";
 import Lottie from "lottie-web";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
 import * as React from "react";
 import Link from "next/link";
 function Hero() {
-  const router = useRouter();
   const container = React.useRef(null);
   React.useEffect(() => {
     const instance = Lottie.loadAnimation({

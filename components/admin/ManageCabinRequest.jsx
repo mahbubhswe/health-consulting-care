@@ -52,9 +52,9 @@ export default function ManageAppointment({ data }) {
                       reverseButtons: true,
                       cancelButtonColor: "red",
                       allowOutsideClick: false,
-                      preConfirm: async (roomAndCabinNumber) => {
+                      preConfirm: async (updatedRoomAndCabinNumber) => {
                         const { data } = await axios.put(
-                          `/api/admin/approveRoomAndCabinRequest?id=${params.row.id}&roomAndCabinNumber=${roomAndCabinNumber}`
+                          `/api/admin/approveRoomAndCabinRequest?id=${params.row.id}&updatedRoomAndCabinNumber=${updatedRoomAndCabinNumber}&roomAndCabinNumber=${params.row.roomAndCabinNumber}`
                         );
                         if (data == "Request approved successfully!") {
                           Swal.fire("Success", data, "success").then(

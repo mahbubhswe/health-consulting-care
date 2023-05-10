@@ -43,7 +43,7 @@ export default function AboutUs() {
           >
             <NextImage
               src="/icons/specialty.svg"
-              alt="alumni pic"
+              alt="specialty"
               width={400}
               height={400}
             />

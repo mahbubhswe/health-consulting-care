@@ -25,7 +25,7 @@ export default function PatientOptions() {
   return (
     <List dense={true}>
       <ListItem disablePadding>
-        <ListItemButton onClick={() => router.push("/dashboard/admin")}>
+        <ListItemButton onClick={() => router.push("/dashboard/patient")}>
           <ListItemIcon>
             <Image
               src="/icons/dashboard.png"

@@ -13,9 +13,10 @@ export default function ManageAppointment({ data }) {
   //create columns for data grid
   const columns = React.useMemo(
     () => [
-      { field: "doctorName", headerName: "Name", width: "200" },
-      { field: "departmentName", headerName: "Department Name", width: "200" },
+      { field: "doctorName", headerName: "Doctor Name", width: "200" },
       { field: "doctorPhone", headerName: "Phone", width: "200" },
+      { field: "departmentName", headerName: "Department Name", width: "200" },
+
       { field: "roomNumber", headerName: "Room Number", width: "200" },
       { field: "status", headerName: "Status", width: "200" },
     ],

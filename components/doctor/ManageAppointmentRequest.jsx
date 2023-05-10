@@ -14,7 +14,6 @@ export default function ManageAppointmentRequest({ data }) {
   const [dataRecord] = React.useState(data);
   const router = useRouter();
   //fees filtering function based on phone
-
   //create columns for data grid
   const columns = React.useMemo(
     () => [

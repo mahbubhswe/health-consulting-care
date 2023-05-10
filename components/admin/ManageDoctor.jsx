@@ -31,7 +31,7 @@ export default function ManageDoctor({ data }) {
   async function recordDeletingFun(id) {
     Swal.fire({
       title: "Are you sure?",
-      text: `You want to delete this employee`,
+      text: `You want to delete this doctor`,
       icon: "question",
       showCancelButton: true,
       cancelButtonColor: "red",
@@ -41,9 +41,9 @@ export default function ManageDoctor({ data }) {
     }).then(async (result) => {
       if (result.isConfirmed) {
         setOpen(true);
-        const { data } = await axios.delete(`/api/employee/delete?id=${id}`);
+        const { data } = await axios.delete(`/api/doctor/delete?id=${id}`);
         setOpen(false);
-        if (data == "Employee deleted successfully") {
+        if (data == "Doctor deleted successfully") {
           Swal.fire("Success", data, "success").then((result) => {
             if (result.isConfirmed) {
               router.reload(window.location.pathname);
@@ -81,7 +81,7 @@ export default function ManageDoctor({ data }) {
                 color="secondary"
                 onClick={() =>
                   router.push(
-                    `/dashboard/employee/update?id=${params.row.id}&employeeId=${params.row.employeeId}&employeeName=${params.row.employeeName}&employeeType=${params.row.employeeType}&employeePhone=${params.row.employeePhone}&salary=${params.row.salary}`
+                    `/dashboard/admin/doctor/update?id=${params.row.id}&fullName=${params.row.fullName}&roomNumber=${params.row.roomNumber}&departmentName=${params.row.departmentName}&phone=${params.row.phone}&email=${params.row.email}&gender=${params.row.gender}`
                   )
                 }
               >

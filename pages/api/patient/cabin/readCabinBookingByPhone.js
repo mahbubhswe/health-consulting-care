@@ -3,8 +3,12 @@ import { prisma } from "../../../../utils/db.ts";
 const handler = nc();
 handler.get(async (req, res) => {
   try {
-    const appointment = await prisma.Appointment.findMany();
-    res.send(appointment);
+    const cabin = await prisma.CabinBooking.findMany({
+      where: {
+        phone: req.query.phone,
+      },
+    });
+    res.send(cabin);
   } catch (error) {
     res.send(error.message);
   }

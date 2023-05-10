@@ -1,14 +1,14 @@
 import nc from "next-connect";
-import { prisma } from "../../../../utils/db.ts";
+import { prisma } from "../../../utils/db.ts";
 const handler = nc();
 handler.get(async (req, res) => {
   try {
-    const ambulance = await prisma.Ambulance.findMany({
+    const appointment = await prisma.Appointment.findMany({
       where: {
-        status: "free",
+        patientPhone: req.query.phone,
       },
     });
-    res.send(ambulance);
+    res.send(appointment);
   } catch (error) {
     res.send(error.message);
   }

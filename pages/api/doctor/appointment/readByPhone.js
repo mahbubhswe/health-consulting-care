@@ -3,12 +3,14 @@ import { prisma } from "../../../../utils/db.ts";
 const handler = nc();
 handler.get(async (req, res) => {
   try {
-    const ambulance = await prisma.Ambulance.findMany({
+    const doctorPhone = `+${req.query.doctorPhone.replace(/\s/g, "")}`;
+    const appointment = await prisma.Appointment.findMany({
       where: {
-        status: "free",
+        doctorPhone: doctorPhone,
       },
     });
-    res.send(ambulance);
+
+    res.send(appointment);
   } catch (error) {
     res.send(error.message);
   }

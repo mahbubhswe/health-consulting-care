@@ -7,7 +7,7 @@ import axios from "axios";
 const getAmbulaneRequest = (url) => axios.get(url).then((res) => res.data);
 export default function Index() {
   const { data } = useSWR(
-    `/api/common/readAmbulanceBooking`,
+    `/api/admin/readAmbulanceBooking`,
     getAmbulaneRequest
   );
   if (!data) {

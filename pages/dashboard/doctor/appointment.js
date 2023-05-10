@@ -9,7 +9,9 @@ const getData = (url) => axios.get(url).then((res) => res.data);
 export default function Index() {
   const [userInfo] = useLocalStorage("userInfo");
   const { data } = useSWR(
-    `/api/doctor/appointment/read?${userInfo ? userInfo.phone : null}`,
+    `/api/doctor/appointment/readByPhone?doctorPhone=${
+      userInfo ? userInfo.phone : null
+    }`,
     getData
   );
   if (!data) {

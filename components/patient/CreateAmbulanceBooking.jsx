@@ -20,7 +20,8 @@ export default function CreateAmbulanceBooking({ data }) {
   const [time, setTime] = React.useState(new Date().getTime());
   const [pikup, setPikup] = React.useState();
   const [destination, setDestination] = React.useState();
-  //create employee
+  
+  //create 
   const handelSubmit = async (e) => {
     e.preventDefault();
     Swal.fire({

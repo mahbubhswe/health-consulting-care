@@ -9,12 +9,10 @@ import {
 import Pdf from "react-to-pdf";
 import Lottie from "lottie-web";
 import React from "react";
-import CreateFormButtonSpacer from "../components/CreateFormButtonSpacer";
 import moment from "moment";
 export default function ShowPdf({ data }) {
   const container = React.useRef(null);
   const ref = React.createRef();
-
   React.useEffect(() => {
     const instance = Lottie.loadAnimation({
       container: container.current,
@@ -25,7 +23,7 @@ export default function ShowPdf({ data }) {
     });
     return () => instance.destroy();
   }, []);
-  console.log(data);
+
   return (
     <>
       <Container sx={{ my: "20px" }} maxWidth="md">
@@ -88,79 +86,77 @@ export default function ShowPdf({ data }) {
               <Typography>
                 Weight: <strong>{data ? data.weight : null}</strong>
               </Typography>
-              <Stack
-                spacing={1}
-                direction={{ xs: "column", sm: "row", md: "row" }}
-              >
-                <Typography>
-                  Test Name:{" "}
-                  <strong>
-                    {data ? data.patientReport[0].testName : null}
-                  </strong>
-                </Typography>
-                <Typography>
-                  Report:{" "}
-                  <strong>{data ? data.patientReport[0].report : null}</strong>
-                </Typography>
-              </Stack>
-              <Typography>
-                Description:
-                <br />
-                <strong>
-                  {data ? data.patientReport[0].description : null}
-                </strong>
-              </Typography>{" "}
-              <Divider />
-              <Typography>
-                Report generate by{" "}
-                <strong>
-                  {data ? data.patientReport[0].reportedBy : null}
-                </strong>
-              </Typography>{" "}
-              <Typography>
-                Date:{" "}
-                <strong>
-                  {data
-                    ? moment(data.patientReport[0].createdAt).format(
-                        "MMM Do YY"
-                      )
-                    : null}
-                </strong>
-              </Typography>
+              {data.patientReport.length > 0 ? (
+                <React.Fragment>
+                  <Typography>
+                    Test Name:{" "}
+                    <strong>
+                      {data ? data.patientReport[0].testName : null}
+                    </strong>
+                  </Typography>
+                  <Typography>
+                    Report:{" "}
+                    <strong>
+                      {data ? data.patientReport[0].report : null}
+                    </strong>
+                  </Typography>
+                  <Typography>
+                    Description:
+                    <br />
+                    <strong>
+                      {data ? data.patientReport[0].description : null}
+                    </strong>
+                  </Typography>{" "}
+                  <Divider />
+                  <Typography>
+                    Report generate by{" "}
+                    <strong>
+                      {data ? data.patientReport[0].reportedBy : null}
+                    </strong>
+                  </Typography>{" "}
+                  <Typography>
+                    Date:{" "}
+                    <strong>
+                      {data
+                        ? moment(data.patientReport[0].createdAt).format(
+                            "MMM Do YY"
+                          )
+                        : null}
+                    </strong>
+                  </Typography>{" "}
+                </React.Fragment>
+              ) : (
+                <p style={{ color: "Red" }}>No report found for this patient</p>
+              )}
             </Stack>
           </Paper>
         </div>
       </Container>{" "}
       <Container maxWidth="md" sx={{ mb: "30px" }}>
         {" "}
-        <CreateFormButtonSpacer>
-          <Button
-            type="button"
-            variant="contained"
-            color="error"
-            size="small"
-            onClick={() => data.push("/dashboard/doctor/genarate-report")}
-          >
-            Cancel
-          </Button>
-          <Pdf
-            targetRef={ref}
-            filename={`report-${data ? data.patientReport[0].testName : null}`}
-          >
-            {({ toPdf }) => (
-              <Button
-                type="submit"
-                variant="contained"
-                size="small"
-                color="secondary"
-                sx={{ color: "#FFFFFF" }}
-                onClick={toPdf}
-              >
-                Download
-              </Button>
-            )}
-          </Pdf>
-        </CreateFormButtonSpacer>{" "}
+   
+          {data.patientReport.length > 0 ? (
+            <Pdf
+              targetRef={ref}
+              filename={`report-${
+                data ? data.patientReport[0].testName : null
+              }`}
+            >
+              {({ toPdf }) => (
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="small"
+                  color="secondary"
+                  sx={{ color: "#FFFFFF" }}
+                  onClick={toPdf}
+                >
+                  Download
+                </Button>
+              )}
+            </Pdf>
+          ) : null}
+
       </Container>
     </>
   );

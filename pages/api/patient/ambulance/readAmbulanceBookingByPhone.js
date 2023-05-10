@@ -3,9 +3,9 @@ import { prisma } from "../../../../utils/db.ts";
 const handler = nc();
 handler.get(async (req, res) => {
   try {
-    const ambulance = await prisma.Ambulance.findMany({
+    const ambulance = await prisma.AmbulanceBooking.findMany({
       where: {
-        status: "free",
+        phone: req.query.phone,
       },
     });
     res.send(ambulance);

@@ -18,15 +18,17 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-export default function AddDoctor() {
+export default function Update({ data }) {
   const [open, setOpen] = React.useState(false);
-  const [fullName, setFullName] = React.useState();
-  const [departmentName, setDepartmentName] = React.useState();
-  const [phone, setPhone] = React.useState(0);
-  const [email, setEmail] = React.useState();
-  const [roomNumber, setRoomNumber] = React.useState();
-  const [password, setPassword] = React.useState();
-  const [gender, setGender] = React.useState();
+  const [id] = React.useState(data.id);
+  const [fullName, setFullName] = React.useState(data.fullName);
+  const [departmentName, setDepartmentName] = React.useState(
+    data.departmentName
+  );
+  const [phone, setPhone] = React.useState(data.phone);
+  const [email, setEmail] = React.useState(data.email);
+  const [roomNumber, setRoomNumber] = React.useState(data.roomNumber);
+  const [gender, setGender] = React.useState(data.gender);
   const router = useRouter();
   const [userInfo] = useLocalStorage("userInfo");
 
@@ -35,7 +37,7 @@ export default function AddDoctor() {
     e.preventDefault();
     Swal.fire({
       title: "Are you sure?",
-      text: "Want to add this doctor",
+      text: "Want to update this doctor",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -45,16 +47,15 @@ export default function AddDoctor() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         setOpen(true);
-        const { data } = await axios.post(
-          `/api/doctor/create`,
+        const { data } = await axios.put(
+          `/api/doctor/update?id=${id}`,
           {
             fullName,
             departmentName,
             phone,
-            password,
             gender,
             email,
-            roomNumber,
+            roomNumber: Number(roomNumber),
           },
           {
             headers: {
@@ -63,7 +64,8 @@ export default function AddDoctor() {
           }
         );
         setOpen(false);
-        if (data == "Doctor added successfully") {
+        if (data == "Doctor updated successfully") {
+          router.push("/dashboard/admin/doctor");
           Swal.fire("Success", data, "success").then((result) => {
             if (result.isConfirmed) {
               router.reload(window.location.pathname);
@@ -91,13 +93,14 @@ export default function AddDoctor() {
           size="small"
           required
           fullWidth
-          name="name"
+          value={fullName}
           color="secondary"
           onChange={(e) => {
             setFullName(e.target.value);
           }}
         />
         <Autocomplete
+          defaultValue={departmentName}
           options={["Family Medicine", "Dermatology"].map((option) => option)}
           onChange={(event, newValue) => {
             setDepartmentName(newValue);
@@ -114,6 +117,7 @@ export default function AddDoctor() {
           )}
         />
         <MuiPhoneNumber
+          value={phone}
           defaultCountry={"bd"}
           label="Phone"
           placeholder="Phone number"
@@ -126,6 +130,7 @@ export default function AddDoctor() {
           onChange={handlerPhoneinput}
         />
         <TextField
+          value={email}
           label="Email"
           type="email"
           placeholder="Enter email"
@@ -138,6 +143,7 @@ export default function AddDoctor() {
           }}
         />{" "}
         <TextField
+          value={roomNumber}
           label="Room Number"
           type="number"
           placeholder="Enter room number"
@@ -149,18 +155,6 @@ export default function AddDoctor() {
             setRoomNumber(e.target.value);
           }}
         />
-        <TextField
-          label="Password"
-          type="password"
-          placeholder="Choice a new password"
-          size="small"
-          required
-          fullWidth
-          color="secondary"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
         <FormControl
           required
           onChange={(e) => {
@@ -168,7 +162,7 @@ export default function AddDoctor() {
           }}
         >
           <FormLabel>Gender</FormLabel>
-          <RadioGroup row>
+          <RadioGroup row defaultValue={gender}>
             <FormControlLabel
               value="male"
               control={<Radio color="secondary" size="small" />}
@@ -198,7 +192,7 @@ export default function AddDoctor() {
             color="secondary"
             sx={{ color: "#FFFFFF" }}
           >
-            Add Doctor
+            Update
           </Button>
         </CreateFormButtonSpacer>
       </Stack>

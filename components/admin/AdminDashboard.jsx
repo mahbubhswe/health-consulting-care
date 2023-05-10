@@ -1,8 +1,9 @@
 import { Stack } from "@mui/material";
 import React from "react";
 import ItemOverview from "../ItemOverview";
+import BarChart from "../BarChart";
+import PaiChart from "../PaiChart";
 export default function AdminDashboard({ data }) {
-console.log(data);
   return (
     <React.Fragment>
       <ItemOverview data={data} />
@@ -15,7 +16,9 @@ console.log(data);
           width: "100%",
         }}
       >
-       
+        <BarChart data={data} />
+
+        <PaiChart data={data} />
       </Stack>
     </React.Fragment>
   );

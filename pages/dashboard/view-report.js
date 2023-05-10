@@ -1,7 +1,7 @@
 import React from "react";
 import useSWR from "swr";
 import Loading from "../../components/Loading";
-import DoctorLayout from "../../components/doctor/DoctorLayout";
+import PdfLayout from "../../components/PdfLayout";
 import ShowPdf from "../../components/ShowPdf";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -14,14 +14,14 @@ export default function Index() {
   );
   if (!data) {
     return (
-      <DoctorLayout pageTitle="Loading...">
+      <PdfLayout pageTitle="Loading...">
         <Loading />
-      </DoctorLayout>
+      </PdfLayout>
     );
   }
   return (
-    <DoctorLayout pageTitle="View Patient Report">
+    <PdfLayout pageTitle="View Patient Report">
       <ShowPdf data={data} />
-    </DoctorLayout>
+    </PdfLayout>
   );
 }

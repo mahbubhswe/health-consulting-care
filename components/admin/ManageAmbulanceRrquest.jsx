@@ -54,9 +54,9 @@ export default function ManageAmbulanceBookin({ data }) {
                       reverseButtons: true,
                       cancelButtonColor: "red",
                       allowOutsideClick: false,
-                      preConfirm: async (ambulanceNumber) => {
+                      preConfirm: async (updatedAmbulanceNumber) => {
                         const { data } = await axios.put(
-                          `/api/admin/approveAmbulanceRequest?id=${params.row.id}&ambulanceNumber=${ambulanceNumber}`
+                          `/api/admin/approveAmbulanceRequest?id=${params.row.id}&ambulanceNumber=${params.row.ambulanceNumber}&updatedAmbulanceNumber=${updatedAmbulanceNumber}`
                         );
                         if (data == "Request approved successfully!") {
                           Swal.fire("Success", data, "success").then(

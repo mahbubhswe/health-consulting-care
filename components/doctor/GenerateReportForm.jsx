@@ -175,7 +175,7 @@ export default function Create({ data }) {
               variant="contained"
               color="error"
               size="small"
-              onClick={() => router.push("/dashboard/doctor/genarate-report")}
+              onClick={() => router.push("/dashboard/doctor")}
             >
               Cancel
             </Button>

@@ -3,26 +3,36 @@ import { prisma } from "../../../utils/db.ts";
 const handler = nc();
 handler.put(async (req, res) => {
   try {
-    if (req.query.ambulanceNumber) {
-      await prisma.AmbulanceBooking.update({
-        where: {
-          id: req.query.id,
-        },
-        data: {
-          ambulanceNumber: Number(req.query.ambulanceNumber),
-          status: "approved",
-        },
-      });
-    } else {
-      await prisma.AmbulanceBooking.update({
-        where: {
-          id: req.query.id,
-        },
-        data: {
-          status: "approved",
-        },
-      });
-    }
+    await prisma.ambulance.update({
+      where: {
+        ambulanceNumber: Number(
+          req.query.updatedAmbulanceNumber
+            ? req.query.updatedAmbulanceNumber
+            : req.query.ambulanceNumber
+        ),
+      },
+      data: {
+        ambulanceNumber: Number(
+          req.query.updatedAmbulanceNumber
+            ? req.query.updatedAmbulanceNumber
+            : req.query.ambulanceNumber
+        ),
+        status: "booked",
+      },
+    });
+    await prisma.AmbulanceBooking.update({
+      where: {
+        id: req.query.id,
+      },
+      data: {
+        ambulanceNumber: Number(
+          req.query.updatedAmbulanceNumber
+            ? req.query.updatedAmbulanceNumber
+            : req.query.ambulanceNumber
+        ),
+        status: "approved",
+      },
+    });
 
     res.send("Request approved successfully!");
   } catch (error) {
