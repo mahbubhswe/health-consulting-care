@@ -20,7 +20,7 @@ import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import useLocalStorage from "@rehooks/local-storage";
-import CreateFormButtonSpacer from "./CreateFormButtonSpacer";
+import CreateFormButtonSpacer from "../CreateFormButtonSpacer";
 import Swal from "sweetalert2";
 import axios from "axios";
 export default function Create({ data }) {
@@ -37,7 +37,7 @@ export default function Create({ data }) {
       renderer: "svg",
       autoplay: true,
       autoplay: true,
-      animationData: require("../public/login.json"),
+      animationData: require("../../public/login.json"),
     });
     return () => instance.destroy();
   }, []);

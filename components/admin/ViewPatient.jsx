@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import moment from "moment";
-import ShowDataGrid from "./ShowDataGrid";
+import ShowDataGrid from "../ShowDataGrid";
 export default function ViewPatientDetails({ data }) {
   const [open, setOpen] = React.useState(false);
   const [record, setRecord] = React.useState(data);

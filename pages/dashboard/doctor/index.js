@@ -6,7 +6,7 @@ import DoctorLayout from "../../../components/doctor/DoctorLayout";
 import axios from "axios";
 const getDashboardInfo = (url) => axios.get(url).then((res) => res.data);
 export default function Index() {
-  const { data } = useSWR(`/api/user/getDashboardInfo`, getDashboardInfo);
+  const { data } = useSWR(`/api/dashboard/read`, getDashboardInfo);
 
   if (!data) {
     return (

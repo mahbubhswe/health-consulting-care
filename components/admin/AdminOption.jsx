@@ -74,7 +74,7 @@ export default function AdminOptions() {
       </Box>
       <ListItem disablePadding>
         <ListItemButton
-          onClick={() => router.push("/dashboard/patient-details")}
+          onClick={() => router.push("/dashboard/admin/patient-details")}
         >
           <ListItemIcon>
             <Image
@@ -88,22 +88,7 @@ export default function AdminOptions() {
           <ListItemText>Patient Details</ListItemText>
         </ListItemButton>
       </ListItem>
-      <ListItem disablePadding>
-        <ListItemButton
-          onClick={() => router.push("dashboard/genarate-report")}
-        >
-          <ListItemIcon>
-            <Image
-              src="/icons/report.png"
-              height={25}
-              width={25}
-              quality={100}
-              alt="icon"
-            />
-          </ListItemIcon>
-          <ListItemText>Genarate Report</ListItemText>
-        </ListItemButton>
-      </ListItem>
+    
       <ListItem disablePadding>
         <ListItemButton
           onClick={() => router.push("/dashboard/admin/medicine")}
