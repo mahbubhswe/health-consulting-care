@@ -38,24 +38,24 @@ export default function PatientOptions() {
           <ListItemText>Dashboard</ListItemText>
         </ListItemButton>
       </ListItem>
-      <Box>
-        <ListItem disablePadding>
-          <ListItemButton
-            onClick={() => router.push("/dashboard/patient/doctor-list")}
-          >
-            <ListItemIcon>
-              <Image
-                src="/icons/doctor.png"
-                height={25}
-                width={25}
-                quality={100}
-                alt="icon"
-              />
-            </ListItemIcon>
-            <ListItemText>Doctor</ListItemText>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
+
+      <ListItem disablePadding>
+        <ListItemButton
+          onClick={() => router.push("/dashboard/patient/doctor-list")}
+        >
+          <ListItemIcon>
+            <Image
+              src="/icons/doctor.png"
+              height={25}
+              width={25}
+              quality={100}
+              alt="icon"
+            />
+          </ListItemIcon>
+          <ListItemText>Doctor</ListItemText>
+        </ListItemButton>
+      </ListItem>
+      {/* <ListItem disablePadding>
           <ListItemButton
             onClick={() => router.push("/dashboard/patient/appointment")}
           >
@@ -70,8 +70,8 @@ export default function PatientOptions() {
             </ListItemIcon>
             <ListItemText>Appointment</ListItemText>
           </ListItemButton>
-        </ListItem>
-      </Box>
+        </ListItem> */}
+
       <ListItem disablePadding>
         <ListItemButton
           onClick={() => router.push("/dashboard/patient/check-medicine")}

@@ -54,6 +54,8 @@ export default function DoctorList({ data }) {
       />
 
       <ShowDataGrid rows={doctors} columns={columns} />
+  
+
       <Backdrop open={open}>
         <CircularProgress color="secondary" />
       </Backdrop>

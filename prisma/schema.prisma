@@ -18,11 +18,14 @@ model Admin {
 model Doctor {
   id             String        @id @default(auto()) @map("_id") @db.ObjectId
   fullName       String
+  profilePic       String
   departmentName String
   phone          String        @unique
   email          String        @unique
   gender         String
   roomNumber     Int
+  description String
+  visitingHours String
   password       String
   appointment    Appointment[]
   joiningDate DateTime @default(now())

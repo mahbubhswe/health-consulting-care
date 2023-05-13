@@ -18,12 +18,18 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import FileBase64 from "react-file-base64";
+import Image from "next/image";
+
 export default function AddDoctor() {
   const [open, setOpen] = React.useState(false);
   const [fullName, setFullName] = React.useState();
+  const [description, setDescription] = React.useState();
+  const [visitingHours, setVisitingHours] = React.useState();
   const [departmentName, setDepartmentName] = React.useState();
   const [phone, setPhone] = React.useState(0);
   const [email, setEmail] = React.useState();
+  const [photo, setPhoto] = React.useState();
   const [roomNumber, setRoomNumber] = React.useState();
   const [password, setPassword] = React.useState();
   const [gender, setGender] = React.useState();
@@ -49,10 +55,13 @@ export default function AddDoctor() {
           `/api/doctor/create`,
           {
             fullName,
+            profilePic: photo,
             departmentName,
             phone,
             password,
+            description,
             gender,
+            visitingHours,
             email,
             roomNumber,
           },
@@ -84,6 +93,23 @@ export default function AddDoctor() {
   return (
     <React.Fragment>
       <Stack spacing={2} component="form" onSubmit={handelSubmit}>
+        {photo ? (
+          <Image src={photo} height={150} width={150} quality={100} />
+        ) : (
+          <p
+            style={{
+              display: "grid",
+              placeContent: "center",
+              height: "150px",
+              width: "150px",
+              border: "1px dashed #ccc",
+              borderRadius: "4px",
+            }}
+          >
+            Select a photo
+          </p>
+        )}
+        <FileBase64 onDone={(e) => setPhoto(e.base64)} />
         <TextField
           label="Doctor name"
           type="text"
@@ -136,7 +162,7 @@ export default function AddDoctor() {
           onChange={(e) => {
             setEmail(e.target.value);
           }}
-        />{" "}
+        />
         <TextField
           label="Room Number"
           type="number"
@@ -147,6 +173,34 @@ export default function AddDoctor() {
           color="secondary"
           onChange={(e) => {
             setRoomNumber(e.target.value);
+          }}
+        />{" "}
+        <TextField
+          label="Visiting Hours"
+          type="text"
+          placeholder="Write visiting hours"
+          size="small"
+          required
+          fullWidth
+          multiline
+          minRows={4}
+          color="secondary"
+          onChange={(e) => {
+            setVisitingHours(e.target.value);
+          }}
+        />
+        <TextField
+          label="Description"
+          type="text"
+          placeholder="Write description"
+          size="small"
+          required
+          multiline
+          minRows={4}
+          fullWidth
+          color="secondary"
+          onChange={(e) => {
+            setDescription(e.target.value);
           }}
         />
         <TextField

@@ -1,62 +1,78 @@
 import * as React from "react";
-import TextField from "@mui/material/TextField";
 import { useRouter } from "next/router";
-import Backdrop from "@mui/material/Backdrop";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import CircularProgress from "@mui/material/CircularProgress";
-import moment from "moment";
-import ShowDataGrid from "../ShowDataGrid";
+import { Avatar, Box, Button, Grid, Stack, Typography } from "@mui/material";
 export default function DoctorList({ data }) {
-  const [open, setOpen] = React.useState(false);
-  const [doctors, setDoctors] = React.useState(data);
   const router = useRouter();
-  //fees filtering function based on phone
-  async function recordFilteringFun(fullName) {
-    if (fullName == "") {
-      setDoctors(data);
-    } else {
-      setDoctors(data.filter((item) => item.fullName == fullName));
-    }
-  }
-
-  //create columns for data grid
-  const columns = React.useMemo(
-    () => [
-      { field: "fullName", headerName: "Name", width: "200" },
-      { field: "departmentName", headerName: "Department Name", width: "200" },
-      { field: "phone", headerName: "Phone", width: "200" },
-      { field: "email", headerName: "Email", width: "200" },
-      { field: "gender", headerName: "Gender", width: "200" },
-      {
-        field: "createdAt",
-        headerName: "Date",
-        width: "200",
-        renderCell: (params) => moment(params.row.createdAt).format("YY-MM-DD"),
-      },
-    ],
-    [doctors]
-  );
 
   return (
     <React.Fragment>
-      <TextField
-        label="Filter..."
-        variant="outlined"
-        type="search"
-        size="small"
-        fullWidth
-        color="secondary"
-        placeholder="Filter by doctor name"
-        onChange={(e) => recordFilteringFun(e.target.value)}
-        InputProps={{
-          endAdornment: <FilterListIcon />,
-        }}
-      />
+      <Grid
+        container
+        direction={"row"}
+        justifyContent={"space-around"}
+        alignItems={"center"}
+      >
+        {data.map((item, index) => (
+          <Grid item key={index}>
+            <Avatar
+              alt="Profile"
+              src={item.profilePic}
+              sx={{ width: 120, height: 120 }}
+            />
 
-      <ShowDataGrid rows={doctors} columns={columns} />
-      <Backdrop open={open}>
-        <CircularProgress color="secondary" />
-      </Backdrop>
+            <Box sx={{ width: "300px", height: "350px" }}>
+              <br />
+              <span
+                style={{
+                  background: "#4B8EB0",
+                  color: "white",
+                  borderRadius: "20px",
+                  padding: "5px",
+                }}
+              >
+                {item.fullName}
+              </span>
+              <br />
+              <Typography>{item.description}</Typography> <br />
+              <Typography
+                sx={{
+                  background: "#D9EDF6",
+                  color: "#339DBB",
+                  borderRadius: "4px",
+                  p: "5px",
+                }}
+              >
+                {item.visitingHours}
+              </Typography>{" "}
+              <br />
+              <Stack direction={"row"} spacing={1}>
+                <Button
+                  size="small"
+                  variant="contained"
+                  sx={{ background: "#5EA4B7" }}
+                  onClick={() =>
+                    router.push(`/view-doctor-profile?id=${item.id}`)
+                  }
+                >
+                  View Profile
+                </Button>
+                <Button
+                  size="small"
+                  variant="contained"
+                  sx={{ background: "#C03B30" }}
+                  onClick={() =>
+                    router.push(
+                      `/dashboard/patient/appointment/create?id=${item.id}`
+                    )
+                  }
+                >
+                  Appointment
+                </Button>
+              </Stack>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
     </React.Fragment>
   );
 }

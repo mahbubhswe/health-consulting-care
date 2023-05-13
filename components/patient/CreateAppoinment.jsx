@@ -4,7 +4,6 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import Autocomplete from "@mui/material/Autocomplete";
 import CreateFormButtonSpacer from "../CreateFormButtonSpacer";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -14,7 +13,7 @@ import { useLocalStorage } from "@rehooks/local-storage";
 import { Box, Typography } from "@mui/material";
 export default function CreateAppoinment({ data }) {
   const [open, setOpen] = React.useState(false);
-  const [doctorInfo, setDoctorInfo] = React.useState({});
+  const [doctorInfo] = React.useState(data);
   const router = useRouter();
   const [userInfo] = useLocalStorage("userInfo");
   const [time, setTime] = React.useState("10:00");
@@ -37,7 +36,7 @@ export default function CreateAppoinment({ data }) {
         const { data } = await axios.post(
           `/api/appointment/create`,
           {
-            patientPhone: userInfo.phone,
+            patientPhone: doctorInfo.phone,
             doctorPhone: doctorInfo.phone,
             departmentName: doctorInfo.departmentName,
             doctorName: doctorInfo.fullName,
@@ -52,7 +51,7 @@ export default function CreateAppoinment({ data }) {
         );
         setOpen(false);
         if (data == "Appointment created successfully") {
-          router.push("/dashboard/patient/appointment");
+          router.push("/dashboard/patient/doctor-list");
           Swal.fire("Success", data, "success").then((result) => {
             if (result.isConfirmed) {
               router.reload(window.location.pathname);
@@ -68,7 +67,7 @@ export default function CreateAppoinment({ data }) {
   return (
     <React.Fragment>
       <Stack spacing={2} component="form" onSubmit={handelSubmit}>
-        <Autocomplete
+        {/* <Autocomplete
           options={
             data.length != 0 ? data.map((option) => option.fullName) : []
           }
@@ -89,7 +88,7 @@ export default function CreateAppoinment({ data }) {
               label="Select doctor"
             />
           )}
-        />
+        /> */}
         <Box
           sx={{ border: "1px  dashed #ccc", p: "10px", borderRadius: "4px" }}
         >
@@ -125,7 +124,7 @@ export default function CreateAppoinment({ data }) {
             variant="contained"
             color="error"
             size="small"
-            onClick={() => router.push("/dashboard/patient/appointment")}
+            onClick={() => router.push("/dashboard/patient/doctor-list")}
           >
             Cancel
           </Button>

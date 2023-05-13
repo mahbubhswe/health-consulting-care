@@ -4,9 +4,14 @@ import PatienLayout from "../../../../components/patient/PatienLayout";
 import useSWR from "swr";
 import Loading from "../../../../components/Loading";
 import axios from "axios";
+import { useRouter } from "next/router";
 const getDoctor = (url) => axios.get(url).then((res) => res.data);
 export default function Index() {
-  const { data } = useSWR(`/api/doctor/read`, getDoctor);
+  const router = useRouter();
+  const { data } = useSWR(
+    `/api/doctor/readById?id=${router ? router.query.id : null}`,
+    getDoctor
+  );
   if (!data) {
     return (
       <PatienLayout pageTitle="Loading...">

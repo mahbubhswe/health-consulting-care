@@ -21,10 +21,16 @@ handler.post(async (req, res) => {
         departmentName,
         gender,
         roomNumber,
+        profilePic,
+        description,
+        visitingHours,
       } = req.body;
       await prisma.Doctor.create({
         data: {
           fullName,
+          profilePic,
+          description,
+          visitingHours,
           departmentName,
           phone,
           email,
