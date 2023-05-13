@@ -3,6 +3,9 @@
   padding: 5px 10px;
   border-radius: 6px;
 }
+.heroStyle {
+  background: linear-gradient(110deg, #098662  60%, #14b486 60%);
+}
 body {
   background-color: #f4f4f4;
 }

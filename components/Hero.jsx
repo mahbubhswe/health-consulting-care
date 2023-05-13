@@ -18,11 +18,7 @@ function Hero() {
     return () => instance.destroy();
   }, []);
   return (
-    <div
-      style={{
-        background: "#19B387",
-      }}
-    >
+    <div className="heroStyle">
       <Container>
         <Stack
           direction={{ xs: "column", sm: "column", md: "row" }}
@@ -42,7 +38,7 @@ function Hero() {
             <PrimaryAnim />
             <Typography
               variant="h2"
-              fontWeight={800}
+              fontWeight={900}
               sx={{ color: "#22292F" }}
               align="center"
             >
@@ -53,7 +49,7 @@ function Hero() {
             <Typography
               align="center"
               variant="h4"
-              sx={{ fontFamily: "cursive", fontWeight: 800, color: "#BB3D6E" }}
+              sx={{ fontFamily: "cursive", fontWeight: 800, color: "#FFFFFF" }}
             >
               <Typewriter
                 options={{
@@ -69,7 +65,12 @@ function Hero() {
                 <Button
                   variant="contained"
                   color="secondary"
-                  sx={{ width: "200px", p: "10px",color:"white" }}
+                  sx={{
+                    width: "200px",
+                    p: "10px",
+                    background: "#14b486",
+                    color: "white",
+                  }}
                   size="large"
                 >
                   Login
