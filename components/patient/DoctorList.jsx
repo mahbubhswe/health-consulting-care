@@ -42,7 +42,7 @@ export default function DoctorList({ data }) {
                   p: "5px",
                 }}
               >
-                {item.visitingHours}
+                Visiting Hours: {item.visitingHours}
               </Typography>{" "}
               <br />
               <Stack direction={"row"} spacing={1}>
