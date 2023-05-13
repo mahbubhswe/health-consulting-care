@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import PrimaryAnim from "./PrimaryAnim";
 import Typewriter from "typewriter-effect";
 import Lottie from "lottie-web";
@@ -20,72 +20,74 @@ function Hero() {
   return (
     <div
       style={{
-        background: "#FAFAFA",
+        background: "#19B387",
       }}
     >
-      <Stack
-        direction={{ xs: "column", sm: "column", md: "row" }}
-        sx={{ height: "700px" }}
-        justifyContent="center"
-        alignItems="center"
-        spacing={5}
-      >
-        <Box
-          ref={container}
-          sx={{
-            width: { xs: "100%", sm: "100%", md: "50%" },
-            display: "grid",
-            placeContent: "center",
-          }}
+      <Container>
+        <Stack
+          direction={{ xs: "column", sm: "column", md: "row" }}
+          sx={{ height: "700px" }}
+          justifyContent="center"
+          alignItems="center"
+          spacing={5}
         >
-          <PrimaryAnim />
-          <Typography
-            variant="h2"
-            fontWeight={800}
-            sx={{ color: "#22292F" }}
-            align="center"
+          <Box
+            ref={container}
+            sx={{
+              width: { xs: "100%", sm: "100%", md: "50%" },
+              display: "grid",
+              placeContent: "center",
+            }}
           >
-            {"Health"}
-            <span style={{ color: "#00C1A2" }}> Consulting</span> Care
-          </Typography>
+            <PrimaryAnim />
+            <Typography
+              variant="h2"
+              fontWeight={800}
+              sx={{ color: "#22292F" }}
+              align="center"
+            >
+              {"Health"}
+              <span style={{ color: "#FFFFFF" }}> Consulting</span> Care
+            </Typography>
 
-          <Typography
-            align="center"
-            variant="h4"
-            sx={{ fontFamily: "cursive", fontWeight: 800, color: "#BB3D6E" }}
-          >
-            <Typewriter
-              options={{
-                strings: "Your Health Solutions",
-                autoStart: true,
-                loop: true,
-              }}
-            />
-          </Typography>
-          <br></br>
-          <Typography align="center">
-            <Link href="/login">
-              <Button
-                variant="outlined"
-                color="secondary"
-                sx={{ width: "200px", p: "10px" }}
-                size="large"
-              >
-                Login
-              </Button>
-            </Link>
-          </Typography>
-        </Box>
+            <Typography
+              align="center"
+              variant="h4"
+              sx={{ fontFamily: "cursive", fontWeight: 800, color: "#BB3D6E" }}
+            >
+              <Typewriter
+                options={{
+                  strings: "Your Health Solutions",
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
+            </Typography>
+            <br></br>
+            <Typography align="center">
+              <Link href="/login">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{ width: "200px", p: "10px",color:"white" }}
+                  size="large"
+                >
+                  Login
+                </Button>
+              </Link>
+            </Typography>
+          </Box>
 
-        <Box
-          ref={container}
-          sx={{
-            width: { xs: "100%", sm: "100%", md: "50%" },
-            display: "grid",
-            placeContent: "center",
-          }}
-        />
-      </Stack>
+          <Box
+            ref={container}
+            sx={{
+              width: { xs: "100%", sm: "100%", md: "50%" },
+              display: "grid",
+              placeContent: "center",
+            }}
+          />
+        </Stack>
+      </Container>
     </div>
   );
 }
