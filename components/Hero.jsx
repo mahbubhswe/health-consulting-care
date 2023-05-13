@@ -39,7 +39,7 @@ function Hero() {
             <Typography
               variant="h2"
               fontWeight={900}
-              sx={{ color: "#22292F" }}
+              sx={{ color: "wheat" }}
               align="center"
             >
               {"Health"}
