@@ -1,5 +1,4 @@
 import {
-  Box,
   Collapse,
   List,
   ListItem,
@@ -55,22 +54,22 @@ export default function PatientOptions() {
           <ListItemText>Doctor</ListItemText>
         </ListItemButton>
       </ListItem>
-      {/* <ListItem disablePadding>
-          <ListItemButton
-            onClick={() => router.push("/dashboard/patient/appointment")}
-          >
-            <ListItemIcon>
-              <Image
-                src="/icons/appointment.png"
-                height={25}
-                width={25}
-                quality={100}
-                alt="icon"
-              />
-            </ListItemIcon>
-            <ListItemText>Appointment</ListItemText>
-          </ListItemButton>
-        </ListItem> */}
+      <ListItem disablePadding>
+        <ListItemButton
+          onClick={() => router.push("/dashboard/patient/appointment")}
+        >
+          <ListItemIcon>
+            <Image
+              src="/icons/appointment.png"
+              height={25}
+              width={25}
+              quality={100}
+              alt="icon"
+            />
+          </ListItemIcon>
+          <ListItemText>Appointment</ListItemText>
+        </ListItemButton>
+      </ListItem>
 
       <ListItem disablePadding>
         <ListItemButton

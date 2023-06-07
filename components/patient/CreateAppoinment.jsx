@@ -36,8 +36,8 @@ export default function CreateAppoinment({ data }) {
         const { data } = await axios.post(
           `/api/appointment/create`,
           {
-            patientPhone: doctorInfo.phone,
             doctorPhone: doctorInfo.phone,
+            patientPhone: userInfo ? userInfo.phone : null,
             departmentName: doctorInfo.departmentName,
             doctorName: doctorInfo.fullName,
             roomNumber: doctorInfo.roomNumber,
@@ -51,7 +51,7 @@ export default function CreateAppoinment({ data }) {
         );
         setOpen(false);
         if (data == "Appointment created successfully") {
-          router.push("/dashboard/patient/doctor-list");
+          router.push("/dashboard/patient/appointment");
           Swal.fire("Success", data, "success").then((result) => {
             if (result.isConfirmed) {
               router.reload(window.location.pathname);

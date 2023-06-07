@@ -16,17 +16,16 @@ export default function ManageAppointment({ data }) {
       { field: "doctorName", headerName: "Doctor Name", width: "200" },
       { field: "doctorPhone", headerName: "Phone", width: "200" },
       { field: "departmentName", headerName: "Department Name", width: "200" },
-
       { field: "roomNumber", headerName: "Room Number", width: "200" },
       { field: "status", headerName: "Status", width: "200" },
     ],
     [dataRecord]
   );
-
+  console.log(data);
   return (
     <React.Fragment>
       <Button
-        onClick={() => router.push("/dashboard/patient/appointment/create")}
+        onClick={() => router.push("/dashboard/patient/doctor-list")}
         variant="outlined"
         color="secondary"
       >
