@@ -1,6 +1,6 @@
 import React from "react";
 import useSWR from "swr";
-import GenerateReportForm from "../../../components/GenerateReportForm";
+import GenerateReportForm from "../../../components/doctor/GenerateReportForm";
 import DashboardLoader from "../../../components/DashboardLoader";
 import DoctorLayout from "../../../components/doctor/DoctorLayout";
 import axios from "axios";

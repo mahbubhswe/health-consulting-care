@@ -1,10 +1,12 @@
 import { Stack } from "@mui/material";
 import React from "react";
-import MemberOverview from "./../MemberOverview";
-export default function AdminDashboard({ data }) {
+import ItemOverview from "../ItemOverview";
+import BarChart from "../BarChart";
+import PaiChart from "../PaiChart";
+export default function DoctorDashboard({ data }) {
   return (
     <React.Fragment>
-      <MemberOverview data={data} />
+      <ItemOverview data={data} />
       <br></br>
 
       <Stack
@@ -14,7 +16,9 @@ export default function AdminDashboard({ data }) {
           width: "100%",
         }}
       >
-      
+        <BarChart data={data} />
+
+        <PaiChart data={data} />
       </Stack>
     </React.Fragment>
   );
