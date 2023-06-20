@@ -23,13 +23,7 @@ function UserProfile() {
         />
       </Typography>
       <Typography component="h4" variant="bold" align="center">
-        {userInfo && userInfo.email}
-      </Typography>
-      <Typography component="p" variant="bold" align="center">
-        {userInfo && userInfo.role}
-      </Typography>
-      <Typography component="p" variant="bold" align="center">
-        {userInfo && userInfo.designation}
+        {userInfo && userInfo.fullName}
       </Typography>
     </Box>
   );
