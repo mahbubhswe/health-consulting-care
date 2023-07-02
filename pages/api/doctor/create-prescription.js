@@ -1,14 +1,15 @@
 import nc from "next-connect";
 import { prisma } from "../../../utils/db.ts";
 const handler = nc();
-handler.delete(async (req, res) => {
+handler.post(async (req, res) => {
   try {
-    await prisma.Fees.delete({
-      where: {
-        id: req.query.id,
+    await prisma.Prescription.create({
+      data: {
+        ...req.body,
       },
     });
-    res.send("Fees of this class deleted successfully");
+
+    res.send("Presentation created successfully");
   } catch (error) {
     res.send(error.message);
   }

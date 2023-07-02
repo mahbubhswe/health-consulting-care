@@ -44,6 +44,7 @@
     "react-google-charts": "^4.0.0",
     "react-hook-form": "^7.40.0",
     "react-iframe": "^1.8.5",
+    "react-quill": "^2.0.0",
     "react-reveal": "^1.2.2",
     "react-simple-tabs-component": "^2.1.1",
     "react-social-icons": "^5.15.0",

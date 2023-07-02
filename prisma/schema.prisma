@@ -123,3 +123,12 @@ roomAndCabinNumber String
   status String  @default("pending")
   createdAt DateTime      @default(now())
 }
+model Prescription {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  age String
+  sex String
+  description String
+  reportedBy String
+  date String
+}

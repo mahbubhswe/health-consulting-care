@@ -102,7 +102,22 @@ export default function AdminOptions() {
           <ListItemText>Genarate Report</ListItemText>
         </ListItemButton>
       </ListItem>
-
+      <ListItem disablePadding>
+        <ListItemButton
+          onClick={() => router.push("/dashboard/doctor/prescription")}
+        >
+          <ListItemIcon>
+            <Image
+              src="/icons/prescription.png"
+              height={25}
+              width={25}
+              quality={100}
+              alt="icon"
+            />
+          </ListItemIcon>
+          <ListItemText>Prescription</ListItemText>
+        </ListItemButton>
+      </ListItem>
       <ListItem disablePadding>
         <ListItemButton onClick={() => setOpen(!open)}>
           <ListItemIcon>
