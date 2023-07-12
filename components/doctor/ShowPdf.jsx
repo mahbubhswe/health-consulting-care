@@ -29,7 +29,11 @@ export default function ShowPdf({ data }) {
       <Container sx={{ my: "20px" }} maxWidth="md">
         <div style={{ width: 800, height: 600 }} ref={ref}>
           <Paper sx={{ p: "30px" }}>
-            <Stack direction={"row"} justifyContent={"space-between"}>
+            <Stack
+              direction={"row"}
+              justifyContent={"space-between"}
+              sx={{ background: "#05C6F1", p: "10px", borderRadius: "4px" }}
+            >
               <p style={{ height: "150px" }} ref={container}></p>
               <div
                 style={{
@@ -39,13 +43,24 @@ export default function ShowPdf({ data }) {
                 }}
               >
                 <Typography
-                  sx={{ fontWeight: 900, color: "grey", fontSize: "21px" }}
+                  sx={{
+                    fontWeight: 900,
+                    color: "grey",
+                    fontSize: "21px",
+                    color: "#FFFFFF",
+                  }}
                 >
                   {data.doctor.fullName}
                 </Typography>
-                <Typography>{data.doctor.departmentName}</Typography>
-                <Typography>{data.doctor.phone}</Typography>
-                <Typography>{data.doctor.email}</Typography>
+                <Typography sx={{ color: "#FFFFFF" }}>
+                  {data.doctor.departmentName}
+                </Typography>
+                <Typography sx={{ color: "#FFFFFF" }}>
+                  {data.doctor.phone}
+                </Typography>
+                <Typography sx={{ color: "#FFFFFF" }}>
+                  {data.doctor.email}
+                </Typography>
                 <br></br>
                 <div
                   style={{
@@ -55,17 +70,18 @@ export default function ShowPdf({ data }) {
                     textAlign: "left",
                   }}
                 >
-                  <Typography>
+                  <Typography sx={{ color: "#FFFFFF" }}>
                     Visiting Hour: {data.doctor.visitingHours}
                   </Typography>{" "}
-                  <Typography>Room Number: {data.doctor.roomNumber}</Typography>{" "}
-                  <Typography style={{ color: "red" }}>
-                    Closs on Friday
+                  <Typography sx={{ color: "#FFFFFF" }}>
+                    Room Number: {data.doctor.roomNumber}
                   </Typography>{" "}
+                  <Typography>Closs on Friday</Typography>{" "}
                 </div>
               </div>
             </Stack>
-            <Divider sx={{ my: "10px" }} />
+            <br></br>
+            {/* <Divider sx={{ my: "10px" }} /> */}
             <Stack
               spacing={1}
               direction={{ xs: "column", sm: "row", md: "row" }}
